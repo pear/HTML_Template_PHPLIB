@@ -259,7 +259,7 @@ class Template_PHPLIB
         }
 
         $str = $this->getVar($handle);
-        $str = @preg_replace($this->_varKeys, $this->_varVals, $str);
+        $str = @str_replace($this->_varKeys, $this->_varVals, $str);
 
         return $str;
     }
