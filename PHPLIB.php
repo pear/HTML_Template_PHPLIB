@@ -40,6 +40,12 @@ class Template_PHPLIB
     var $file  = array();
 
     /**
+     * fallback paths that should be defined in a child class
+     * @var array
+     */
+    var $file_fallbacks = array();
+
+    /**
      * Relative filenames are relative to this pathname
      * @var string
      */
@@ -85,11 +91,13 @@ class Template_PHPLIB
      * @access public
      * @param  string template root directory
      * @param  string how to handle unknown variables
+     * @param  array fallback paths
      */
-    function Template_PHPLIB($root = ".", $unknowns = "remove")
+    function Template_PHPLIB($root = ".", $unknowns = "remove", $fallback="")
     {
         $this->setRoot($root);
         $this->setUnknowns($unknowns);
+        if (is_array($fallback)) $this->file_fallbacks = $fallback;
     }
 
     /**
@@ -451,8 +459,17 @@ class Template_PHPLIB
             $filename = $this->root."/".$filename;
         }
 
-        if (!file_exists($filename)) {
-            $this->halt("filename: file $filename does not exist.");
+        if (file_exists($filename)) return $filename;
+        if (is_array($this->file_fallbacks) && count($this->file_fallbacks) > 0) {
+            reset($this->file_fallbacks);
+            while (list(,$v) = each($this->file_fallbacks)) {
+                if (file_exists($v.basename($filename))) return $v.basename($filename);
+            }
+            $this->halt(sprintf("filename: file %s does not exist in the fallback paths %s.",$filename,implode(",",$this->file_fallbacks)));
+            return false;
+        } else {
+            $this->halt(sprintf("filename: file %s does not exist.",$filename));
+            return false;
         }
 
         return $filename;
@@ -492,7 +509,7 @@ class Template_PHPLIB
         if (!function_exists("file_get_contents")) {
             $str = file_get_contents($filename);
         } else {
-            if (!$fp = fopen($filename,"r")) {
+            if (!$fp = @fopen($filename,"r")) {
                 $this->halt("loadfile: couldn't open $filename");
                 return false;
             }
