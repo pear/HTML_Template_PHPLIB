@@ -201,7 +201,7 @@ class Template_PHPLIB
         preg_match_all($reg, $str, $m);
         $str = preg_replace($reg, "{" . "$name}", $str);
 
-        if (isset($m[1][0]) $this->setVar($handle, $m[1][0]);
+        if (isset($m[1][0])) $this->setVar($handle, $m[1][0]);
         $this->setVar($parent, $str);
     }
 
@@ -250,10 +250,7 @@ class Template_PHPLIB
             return false;
         }
 
-        $str = $this->getVar($handle);
-        $str = @str_replace($this->_varKeys, $this->_varVals, $str);
-
-        return $str;
+        return @str_replace($this->_varKeys, $this->_varVals, $this->getVar($handle));
     }
   
     /**
@@ -288,15 +285,11 @@ class Template_PHPLIB
         if (!is_array($handle)) {
             $str = $this->subst($handle);
 
-            if ($append) {
-                $this->setVar($target, $this->getVar($target) . $str);
-            } else {
-                $this->setVar($target, $str);
-            }
+            ($append) ? $this->setVar($target, $this->getVar($target) . $str) : $this->setVar($target, $str);
         } else {
             reset($handle);
 
-            while (list($i, $h) = each($handle)) {
+            while (list(, $h) = each($handle)) {
                 $str = $this->subst($h);
                 $this->setVar($target, $str);
             }
@@ -356,7 +349,7 @@ class Template_PHPLIB
         } else {
             reset($varname);
     
-            while (list($k, $v) = each($varname)) {
+            while (list($k, ) = each($varname)) {
                 $result[$k] = (isset($this->_varVals[$k])) ? $this->_varVals[$k] : "";
             }
 
@@ -385,7 +378,7 @@ class Template_PHPLIB
         }
 
         reset($m);
-        while (list($k, $v) = each($m)) {
+        while (list(, $v) = each($m)) {
             if (!isset($this->_varKeys[$v])) {
                 $result[$v] = $v;
             }
@@ -495,11 +488,11 @@ class Template_PHPLIB
 
         if (!isset($this->file[$handle])) {
             $this->halt("loadfile: $handle is not a valid handle.");
-          return false;
+            return false;
         }
 
         $filename = $this->file[$handle];
-        $str = @implode("", @file($filename));
+        (function_exists("file_get_contents")) ? $str = file_get_contents($filename) : $str = @implode("", @file($filename));
 
         if ($str=='') {
             $this->halt("loadfile: While loading $handle, $filename does not exist or is empty.");
