@@ -14,7 +14,7 @@
       <email>bjoern@rent-a-phpwizard.de</email>
     </maintainer>
   </maintainers>
-  <license>PHP License</license>
+  <license>LGPL</license>
   <release>
     <version>1.1.1</version>
     <state>stable</state>
@@ -40,6 +40,11 @@ This is the initial independent release of the Template_PHPLIB package.
     <date>2002-04-28</date>
     <notes>
 Renamed to HTML_PHPLIB_Template.
+    </notes>
+    <version>1.2</version>
+    <date>2003-02-12</date>
+    <notes>
+Removed a serious bug concerning the loadfile method.
     </notes>
   </changelog>
 </package>
