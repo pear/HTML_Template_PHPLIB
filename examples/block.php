@@ -11,7 +11,7 @@ $articles = array(
 );
 
 class myT extends Template_PHPLIB {
-	var $file_fallbacks = array("/usr/local/bla","./");
+	var $file_fallbacks = array("/usr/local/bla","./ffl");
 }
 
 $t =& new myT("/usr/local", "keep");
