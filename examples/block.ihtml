@@ -1,0 +1,6 @@
+<p>This is a {BLOCKER}</p>
+<table border="1" cellpadding="2" cellspacing="0">
+<!-- BEGIN articlerow -->
+<tr><td>{ID}</td><td>{ANAME}</td></tr>
+<!-- END articlerow -->
+</table>
