@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+<package version="1.0">
+  <name>HTML_Template_IT</name>
+  <summary>preg_* based template system.</summary>
+  <description>
+    The popular Template system from PHPLIB ported to PEAR.
+  </description>
+  <maintainers>
+    <maintainer>
+      <user>bjoern</user>
+      <role>lead</role>
+      <name>Björn Schotte</name>
+      <email>bjoern@rent-a-phpwizard.de</email>
+    </maintainer>
+  </maintainers>
+  <license>PHP License</license>
+  <release>
+    <version>1.1</version>
+    <state>stable</state>
+    <date>2002-04-28</date>
+    <notes>
+      Renamed to HTML_PHPLIB_Template.
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="HTML/Template">
+        <file role="php" name="PHPLIB.php"/>
+      </dir>
+    </filelist>
+  </release>
+  <changelog>
+    <version>1.0</version>
+    <date>2001-09-04</date>
+    <notes>
+      This is the initial independent release of the Template_PHPLIB package.
+    </notes>
+  </changelog>
+</package>
