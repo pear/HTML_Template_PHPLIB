@@ -506,7 +506,7 @@ class Template_PHPLIB
         }
 
         $filename = $this->file[$handle];
-        if (!function_exists("file_get_contents")) {
+        if (function_exists("file_get_contents")) {
             $str = file_get_contents($filename);
         } else {
             if (!$fp = @fopen($filename,"r")) {
