@@ -229,7 +229,7 @@ class Template_PHPLIB
             if (!empty($varname))
                 if ($this->debug) print "scalar: set *$varname* to *$value*<br>\n";
 
-            $this->_varKeys[$varname] = "/".$this->_varname($varname)."/";
+            $this->_varKeys[$varname] = $this->_varname($varname);
             ($append) ? $this->_varVals[$varname] .= $value : $this->_varVals[$varname] = $value;
 
         } else {
@@ -239,7 +239,7 @@ class Template_PHPLIB
                 if (!empty($k))
                     if ($this->debug) print "array: set *$k* to *$v*<br>\n";
 
-                $this->_varKeys[$k] = "/".$this->_varname($k)."/";
+                $this->_varKeys[$k] = $this->_varname($k);
                 ($append) ? $this->_varVals[$k] .= $v : $this->_varVals[$k] = $v;
             }
         }
@@ -486,7 +486,7 @@ class Template_PHPLIB
      */
     function _varname($varname)
     {
-        return preg_quote("{".$varname."}");
+        return "{".$varname."}";
     }
 
     /**
