@@ -1,6 +1,7 @@
 <?php
 
 include_once 'HTML/Template/PHPLIB.php';
+include_once 'Benchmark/Timer.php';
 
 /**
 * "keep" = keep unknown template variables,
@@ -12,6 +13,8 @@ include_once 'HTML/Template/PHPLIB.php';
 * { and } which will then get removed.
 */
 $t =& new Template_PHPLIB("./", "keep");
+$timer =& new Benchmark_Timer();
+$timer->start();
 
 $t->setFile(array(
 	"main" => "tpl1.ihtml"
@@ -30,4 +33,6 @@ $t->setVar(array(
 */
 $t->parse("out", array("main"));
 $t->p("out");
+$timer->stop();
+$timer->display();
 ?>

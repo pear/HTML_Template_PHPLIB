@@ -1,6 +1,7 @@
 <?php
 
 include_once 'HTML/Template/PHPLIB.php';
+include_once 'Benchmark/Timer.php';
 
 $articles = array(
 	"ISBN345624345" => "Matrix 2",
@@ -10,6 +11,9 @@ $articles = array(
 );
 
 $t =& new Template_PHPLIB("./", "keep");
+
+$timer =& new Benchmark_Timer();
+$timer->start();
 
 $t->setFile(array(
 	"main" => "tpl1.ihtml",
@@ -40,4 +44,6 @@ foreach ($articles as $isbn => $name) {
 
 $t->parse("CONTENT", "block");
 $t->pparse("out",array("main"));
+$timer->stop();
+$timer->display();
 ?>
