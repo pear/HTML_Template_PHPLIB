@@ -506,7 +506,7 @@ class Template_PHPLIB
           return false;
         }
 
-        $filename = $this->_filename($this->file[$handle]);
+        $filename = $this->file[$handle];
         $str = implode("", @file($filename));
 
         if (empty($str)) {
