@@ -10,7 +10,11 @@ $articles = array(
 	"ISBN674589123" => "Joe user's adventures"
 );
 
-$t =& new Template_PHPLIB("./", "keep");
+class myT extends Template_PHPLIB {
+	var $file_fallbacks = array("/usr/local/bla","./");
+}
+
+$t =& new myT("/usr/local", "keep");
 
 $timer =& new Benchmark_Timer();
 $timer->start();
