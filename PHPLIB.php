@@ -356,7 +356,11 @@ class Template_PHPLIB
     function getVar($varname)
     {
         if (!is_array($varname)) {
-            return $this->_varVals[$varname];
+            if (isset($this->_varVals[$varname])) {
+                return $this->_varVals[$varname];
+            } else {
+                return "";
+            }
         } else {
             reset($varname);
     
