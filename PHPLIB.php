@@ -492,7 +492,17 @@ class Template_PHPLIB
         }
 
         $filename = $this->file[$handle];
-        (function_exists("file_get_contents")) ? $str = file_get_contents($filename) : $str = @implode("", @file($filename));
+        if (!function_exists("file_get_contents")) {
+            $str = file_get_contents($filename);
+        } else {
+            if (!$fp = fopen($filename,"r")) {
+                $this->halt("loadfile: couldn't open $filename");
+                return false;
+            }
+
+            $str = fread($fp,filesize($filename));
+            fclose($fp);
+        }
 
         if ($str=='') {
             $this->halt("loadfile: While loading $handle, $filename does not exist or is empty.");
