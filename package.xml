@@ -16,11 +16,11 @@
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>1.1</version>
+    <version>1.1.1</version>
     <state>stable</state>
-    <date>2002-04-28</date>
+    <date>2003-02-01</date>
     <notes>
-      Renamed to HTML_PHPLIB_Template.
+Fix warning when using error_reporting(E_ALL).
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="HTML/Template">
@@ -32,7 +32,14 @@
     <version>1.0</version>
     <date>2001-09-04</date>
     <notes>
-      This is the initial independent release of the Template_PHPLIB package.
+This is the initial independent release of the Template_PHPLIB package.
+    </notes>
+  </changelog>
+  <changelog>
+    <version>1.1</version>
+    <date>2002-04-28</date>
+    <notes>
+Renamed to HTML_PHPLIB_Template.
     </notes>
   </changelog>
 </package>
