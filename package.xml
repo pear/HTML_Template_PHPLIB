@@ -6,7 +6,8 @@
   <description>
     The popular Template system from PHPLIB ported to PEAR. It has some
     features that can't be found currently in the original version like
-    fallback paths.
+    fallback paths. It has minor improvements and cleanup in the code as
+    well as some speed improvements.
   </description>
   <maintainers>
     <maintainer>
@@ -18,17 +19,11 @@
   </maintainers>
   <license>LGPL</license>
   <release>
-    <version>1.3</version>
+    <version>1.3.1</version>
     <state>stable</state>
-    <date>2003-06-03</date>
+    <date>2003-06-11</date>
     <notes>
-    - added examples with use of Benchmark_Timer
-    - added fallback template paths, i.e. first search
-      in "./" and then in "/www/myinstall/mastertemplates/A/"
-      and then in "/www/myinstall/mastertemplates/B/"
-    - got rid of implode(...,file()) and using file_get_contents()
-      if available (PHP &gt;= 4.3.0)
-    - some minor improvements and cleanup in the code  
+    Bugfix release, update recommended if you use PHP &lt;=4.3.0
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="HTML/Template">
@@ -71,6 +66,19 @@ Fix warning when using error_reporting(E_ALL).
     <date>2003-02-12</date>
     <notes>
 Removed a serious bug concerning the loadfile method.
+    </notes>
+   </release>
+   <release>
+    <version>1.3</version>
+    <date>2003-06-03</date>
+    <notes>
+    - added examples with use of Benchmark_Timer
+    - added fallback template paths, i.e. first search
+      in "./" and then in "/www/myinstall/mastertemplates/A/"
+      and then in "/www/myinstall/mastertemplates/B/"
+    - got rid of implode(...,file()) and using file_get_contents()
+      if available (PHP &gt;= 4.3.0)
+    - some minor improvements and cleanup in the code  
     </notes>
    </release>
   </changelog>
