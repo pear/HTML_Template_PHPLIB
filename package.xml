@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE package SYSTEM "../package.dtd">
 <package version="1.0">
-  <name>HTML_Template_IT</name>
+  <name>HTML_Template_PHPLIB</name>
   <summary>preg_* based template system.</summary>
   <description>
     The popular Template system from PHPLIB ported to PEAR.
