@@ -201,7 +201,7 @@ class Template_PHPLIB
         preg_match_all($reg, $str, $m);
         $str = preg_replace($reg, "{" . "$name}", $str);
 
-        $this->setVar($handle, $m[1][0]);
+        if (isset($m[1][0]) $this->setVar($handle, $m[1][0]);
         $this->setVar($parent, $str);
     }
 
@@ -391,7 +391,7 @@ class Template_PHPLIB
             }
         }
     
-        if (count($result)) {
+        if (isset($result) && count($result)) {
             return $result;
         } else {
             return false;
