@@ -324,7 +324,7 @@ class Template_PHPLIB
     {
         reset($this->_varKeys);
 
-        while (list($k, $v) = each($this->_varKeys)) {
+        while (list($k, ) = each($this->_varKeys)) {
             $result[$k] = $this->getVar($k);
         }
 
@@ -401,9 +401,6 @@ class Template_PHPLIB
     function finish($str)
     {
         switch ($this->unknowns) {
-            case "keep":
-                break;
-      
             case "remove":
                 $str = preg_replace('/{[^ \t\r\n}]+}/', "", $str);
                 break;
