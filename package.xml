@@ -26,6 +26,13 @@ Fix warning when using error_reporting(E_ALL).
       <dir name="/" baseinstalldir="HTML/Template">
         <file role="php" name="PHPLIB.php"/>
       </dir>
+      <dir name="examples" role="doc">
+        <file name="README"/>
+	<file name="block.ihtml"/>
+	<file name="block.php"/>
+	<file name="tpl1.ihtml"/>
+	<file name="tpl1.php"/>
+      </dir>
     </filelist>
   </release>
   <changelog>
