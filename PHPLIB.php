@@ -414,7 +414,7 @@ class Template_PHPLIB
                 break;
 
             case "comment":
-                $str = preg_replace('/{([^ \t\r\n}]+)}/', "<!-- Template $handle: Variable \\1 undefined -->", $str);
+                $str = preg_replace('/{([^ \t\r\n}]+)}/', "<!-- Template variable \\1 undefined -->", $str);
                 break;
         }
 
