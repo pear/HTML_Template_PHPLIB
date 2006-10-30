@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
 <package version="1.0">
   <name>HTML_Template_PHPLIB</name>
@@ -13,7 +13,7 @@
     <maintainer>
       <user>bjoern</user>
       <role>lead</role>
-      <name>Björn Schotte</name>
+      <name>BjÃ¶rn Schotte</name>
       <email>bjoern@rent-a-phpwizard.de</email>
     </maintainer>
   </maintainers>
