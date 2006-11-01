@@ -38,7 +38,15 @@ well as some speed improvements.
  </notes>
  <contents>
   <dir name="/">
+   <dir name="HTML">
+    <dir name="Template">
+     <file name="PHPLIB.php" role="php"/>
+    </dir>
+   </dir>
+   <!-- examples -->
    <dir name="examples">
+    <file baseinstalldir="HTML/Template" name="authors.tpl" role="doc" />
+    <file baseinstalldir="HTML/Template" name="authors.php" role="doc" />
     <file baseinstalldir="HTML/Template" name="block.ihtml" role="doc" />
     <file baseinstalldir="HTML/Template" name="block.php" role="doc" />
     <file baseinstalldir="HTML/Template" name="ittest.php" role="doc" />
@@ -46,7 +54,12 @@ well as some speed improvements.
     <file baseinstalldir="HTML/Template" name="tpl1.ihtml" role="doc" />
     <file baseinstalldir="HTML/Template" name="tpl1.php" role="doc" />
    </dir>
-   <file baseinstalldir="HTML/Template" name="PHPLIB.php" role="php" />
+   <!-- unittests -->
+   <dir name="tests">
+    <file name="AllTests.php" role="test"/>
+    <file name="HTML_Template_PHPLIBTest.php" role="test"/>
+    <file name="file.tpl" role="test"/>
+   </dir>
   </dir>
  </contents>
 

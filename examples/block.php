@@ -10,7 +10,7 @@ $articles = array(
     "ISBN674589123" => "Joe user's adventures"
 );
 
-class myT extends Template_PHPLIB {
+class myT extends HTML_Template_PHPLIB {
     var $file_fallbacks = array("/usr/local/bla","./");
 }
 

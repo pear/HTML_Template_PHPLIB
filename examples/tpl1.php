@@ -12,7 +12,7 @@ include_once 'Benchmark/Timer.php';
 * in your HTML code since those are also using
 * { and } which will then get removed.
 */
-$t =& new Template_PHPLIB("./", "keep");
+$t =& new HTML_Template_PHPLIB("./", "keep");
 $timer =& new Benchmark_Timer();
 $timer->start();
 

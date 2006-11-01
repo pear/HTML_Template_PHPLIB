@@ -5,13 +5,11 @@
 // under the LGPL.
 //
 // Authors: Kristian Koehntopp <kris@koehntopp.de> (original from PHPLIB)
-//          Bjoern Schotte <bjoern@rent-a-phpwizard.de> (PEARification)
+//          Bjoern Schotte <schotte@mayflower.de> (PEARification)
 //          Martin Jansen <mj@php.net> (PEAR conformance)
 //
 // $Id$
 //
-
-require_once 'PEAR.php';
 
 /**
  * Converted PHPLIB Template class
@@ -21,11 +19,11 @@ require_once 'PEAR.php';
  * template code from phplib-stable CVS. Original author
  * was Kristian Koehntopp <kris@koehntopp.de>
  *
- * @author  Bjoern Schotte <bjoern@rent-a-phpwizard.de>
+ * @author  Bjoern Schotte <schotte@mayflower.de>
  * @author  Martin Jansen <mj@php.net> (PEAR conformance)
  * @version 1.0
  */
-class Template_PHPLIB
+class HTML_Template_PHPLIB
 {
     /**
      * If set, echo assignments
@@ -93,7 +91,7 @@ class Template_PHPLIB
      * @param  string how to handle unknown variables
      * @param  array fallback paths
      */
-    function Template_PHPLIB($root = '.', $unknowns = 'remove', $fallback='')
+    function HTML_Template_PHPLIB($root = '.', $unknowns = 'remove', $fallback='')
     {
         $this->setRoot($root);
         $this->setUnknowns($unknowns);
@@ -157,7 +155,7 @@ class Template_PHPLIB
         if (!is_array($handle)) {
 
             if ($filename == '') {
-                $this->halt('setFile: For handle ' . $handle . 'filename is empty.');
+                $this->halt('setFile: For handle ' . $handle . ' filename is empty.');
                 return false;
             }
 
@@ -560,7 +558,17 @@ class Template_PHPLIB
      */
     function haltMsg($msg)
     {
+        require_once 'PEAR.php';
         return PEAR::raiseError(sprintf('<b>Template Error:</b> %s<br>' . "\n", $msg));
     }
 }
+
+/**
+*   Backwards-compatibility for HTML_Template_PHPLIB.
+*   Used to have this name here.
+*/
+class Template_PHPLIB extends HTML_Template_PHPLIB
+{
+}
+
 ?>
