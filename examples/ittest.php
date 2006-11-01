@@ -22,10 +22,10 @@ $t->setVariable(array(
 ));
 
 foreach ($articles as $k => $v) {
-	$t->setCurrentBlock("articlerow");
-	$t->setVariable("ID", $k);
-	$t->setVariable("ANAME", $v);
-	$t->parseCurrentBlock("articlerow");
+    $t->setCurrentBlock("articlerow");
+    $t->setVariable("ID", $k);
+    $t->setVariable("ANAME", $v);
+    $t->parseCurrentBlock("articlerow");
 }
 $t->show();
 $timer->stop();

@@ -17,15 +17,15 @@ $timer =& new Benchmark_Timer();
 $timer->start();
 
 $t->setFile(array(
-	"main" => "tpl1.ihtml"
+    "main" => "tpl1.ihtml"
 ));
 
 $welcome = "Welcome to the real world";
 
 $t->setVar(array(
-	"TITLE" => "This is my title",
-	"BGCOLOR" => "#cccccc",
-	"CONTENT" => $welcome
+    "TITLE" => "This is my title",
+    "BGCOLOR" => "#cccccc",
+    "CONTENT" => $welcome
 ));
 
 /**
