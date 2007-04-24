@@ -20,12 +20,17 @@ well as some speed improvements.
   <name>Björn Schotte</name>
   <user>bjoern</user>
   <email>schotte@mayflower.de</email>
+  <active>no</active>
+ </lead>
+ <lead>
+  <name>Christian Weiske</name>
+  <user>cweiske</user>
+  <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2003-06-11</date>
- <time>08:23:28</time>
+ <date>2007-04-24</date>
  <version>
-  <release>1.3.1</release>
+  <release>1.3.2</release>
   <api>1.3.1</api>
  </version>
  <stability>
@@ -34,7 +39,12 @@ well as some speed improvements.
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  Bugfix release, update recommended if you use PHP &lt;=4.3.0
+  Bugfix release:
+  - fixing bug #6945: undefined variable notice in function finish($str)
+  - class name is HTML_Template_PHPLIB now
+  - package.xml v2
+  - unit tests
+  - cweiske is lead now
  </notes>
  <contents>
   <dir name="/">
@@ -159,7 +169,44 @@ well as some speed improvements.
       and then in &quot;/www/myinstall/mastertemplates/B/&quot;
     - got rid of implode(...,file()) and using file_get_contents()
       if available (PHP &gt;= 4.3.0)
-    - some minor improvements and cleanup in the code  
+    - some minor improvements and cleanup in the code
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.3.1</release>
+    <api>1.3.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-06-11</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+    Bugfix release, update recommended if you use PHP &lt;=4.3.0
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.3.2</release>
+    <api>1.3.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-04-24</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+  Bugfix release:
+  - fixing bug #6945: undefined variable notice in function finish($str)
+  - class name is HTML_Template_PHPLIB now
+  - package.xml v2
+  - unit tests
+  - cweiske is lead now
    </notes>
   </release>
  </changelog>
