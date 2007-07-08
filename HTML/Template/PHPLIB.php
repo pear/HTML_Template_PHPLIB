@@ -159,7 +159,7 @@ class HTML_Template_PHPLIB
      *                          handle/name value pairs
      * @param string $filename Name of template file
      *
-     * @return bool
+     * @return bool True if file could be loaded
      * @access public
      */
     function setFile($handle, $filename = '')
@@ -173,13 +173,20 @@ class HTML_Template_PHPLIB
             }
 
             $this->file[$handle] = $this->_filename($filename);
-
+            if ($this->file[$handle] === false) {
+                return false;
+            }
+            return true;
         } else {
-
             reset($handle);
+            $error = false;
             while (list($h, $f) = each($handle)) {
                 $this->file[$h] = $this->_filename($f);
+                if ($this->file[$h] === false) {
+                    $error = true;
+                }
             }
+            return $error === false;
         }
     }
 
@@ -614,6 +621,19 @@ class HTML_Template_PHPLIB
         require_once 'PEAR.php';
         return PEAR::raiseError(sprintf('<b>Template Error:</b> %s<br>'
              . "\n", $msg));
+    }
+
+    /**
+     * Returns the last error message if any
+     *
+     * @return boolean|string Last error message if any
+     */
+    function getLastError()
+    {
+        if ($this->_lastError == '') {
+            return false;
+        }
+        return $this->_lastError;
     }
 }
 
