@@ -19,9 +19,13 @@
  * template code from phplib-stable CVS. Original author
  * was Kristian Koehntopp <kris@koehntopp.de>
  *
- * @author  Bjoern Schotte <schotte@mayflower.de>
- * @author  Martin Jansen <mj@php.net> (PEAR conformance)
- * @version 1.0
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Bjoern Schotte <schotte@mayflower.de>
+ * @author   Martin Jansen <mj@php.net> (PEAR conformance)
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
  */
 class HTML_Template_PHPLIB
 {
@@ -70,7 +74,9 @@ class HTML_Template_PHPLIB
     var $unknowns = 'remove';
 
     /**
-     * 'yes' => halt, 'report' => report error, continue, 'no' => ignore error quietly
+     * 'yes' => halt,
+     * 'report' => report error, continue,
+     * 'no' => ignore error quietly
      * @var string
      */
     var $haltOnError  = 'report';
@@ -86,10 +92,11 @@ class HTML_Template_PHPLIB
     /**
      * Constructor
      *
+     * @param string $root     Template root directory
+     * @param string $unknowns How to handle unknown variables
+     * @param array  $fallback Fallback paths
+     *
      * @access public
-     * @param  string template root directory
-     * @param  string how to handle unknown variables
-     * @param  array fallback paths
      */
     function HTML_Template_PHPLIB($root = '.', $unknowns = 'remove', $fallback='')
     {
@@ -101,9 +108,10 @@ class HTML_Template_PHPLIB
     /**
      * Sets the template directory
      *
-     * @access public
-     * @param  string new template directory
+     * @param string $root New template directory
+     *
      * @return bool
+     * @access public
      */
     function setRoot($root)
     {
@@ -127,8 +135,10 @@ class HTML_Template_PHPLIB
      * - 'comment' will replace undefined variables with comments
      * - 'keep' will keep undefined variables as-is
      *
+     * @param string $unknowns Unknowns
+     *
+     * @return void
      * @access public
-     * @param  string unknowns
      */
     function setUnknowns($unknowns = 'keep')
     {
@@ -145,17 +155,20 @@ class HTML_Template_PHPLIB
      * handle and $filename as the filename if you want to define only
      * one template.
      *
-     * @access public
-     * @param  mixed handle for a filename or array with handle/name value pairs
-     * @param  string name of template file
+     * @param mixed  $handle   Handle for a filename or array with
+     *                          handle/name value pairs
+     * @param string $filename Name of template file
+     *
      * @return bool
+     * @access public
      */
     function setFile($handle, $filename = '')
     {
         if (!is_array($handle)) {
 
             if ($filename == '') {
-                $this->halt('setFile: For handle ' . $handle . ' filename is empty.');
+                $this->halt('setFile: For handle '
+                            . $handle . ' filename is empty.');
                 return false;
             }
 
@@ -186,10 +199,12 @@ class HTML_Template_PHPLIB
      * It extracts the template $handle from $parent and places
      * variable {$name} instead.
      *
+     * @param string $parent Parent handle
+     * @param string $handle Block name handle
+     * @param string $name   Variable substitution name
+     *
+     * @return void
      * @access public
-     * @param  string parent handle
-     * @param  string block name handle
-     * @param  string variable substitution name
      */
     function setBlock($parent, $handle, $name = '')
     {
@@ -203,7 +218,8 @@ class HTML_Template_PHPLIB
         }
 
         $str = $this->getVar($parent);
-        $reg = "/[ \t]*<!--\s+BEGIN $handle\s+-->\s*?\n?(\s*.*?\n?)\s*<!--\s+END $handle\s+-->\s*?\n?/sm";
+        $reg = "/[ \t]*<!--\s+BEGIN $handle\s+-->\s*?\n?(\s*.*?\n?)"
+             . "\s*<!--\s+END $handle\s+-->\s*?\n?/sm";
         preg_match_all($reg, $str, $m);
         $str = preg_replace($reg, '{' . $name . '}', $str);
 
@@ -214,30 +230,44 @@ class HTML_Template_PHPLIB
     /**
      * Set corresponding substitutions for placeholders
      *
+     * @param string  $varname Name of a variable that is to be defined
+     *                          or an array of variables with value
+     *                          substitution as key/value pairs
+     * @param string  $value   Value of that variable
+     * @param boolean $append  If true, the value is appended to the
+     *                          variable's existing value
+     *
+     * @return void
      * @access public
-     * @param  string name of a variable that is to be defined or an array of variables with value substitution as key/value pairs
-     * @param  string value of that variable
-     * @param  boolean if true, the value is appended to the variable's existing value
      */
     function setVar($varname, $value = '', $append = false)
     {
         if (!is_array($varname)) {
 
-            if (!empty($varname))
-                if ($this->debug) print 'scalar: set *' . $varname . '* to *' . $value . '*<br>\n';
+            if (!empty($varname)) {
+                if ($this->debug) {
+                    print 'scalar: set *' . $varname . '* to *'
+                         . $value . '*<br>\n';
+                }
+            }
 
             $this->_varKeys[$varname] = $this->_varname($varname);
-            ($append) ? $this->_varVals[$varname] .= $value : $this->_varVals[$varname] = $value;
+            ($append) ? $this->_varVals[$varname] .= $value
+                      : $this->_varVals[$varname] = $value;
 
         } else {
             reset($varname);
 
             while (list($k, $v) = each($varname)) {
-                if (!empty($k))
-                    if ($this->debug) print 'array: set *' . $k . '* to *' . $v . '*<br>\n';
+                if (!empty($k)) {
+                    if ($this->debug) {
+                        print 'array: set *' . $k . '* to *' . $v . '*<br>\n';
+                    }
+                }
 
                 $this->_varKeys[$k] = $this->_varname($k);
-                ($append) ? $this->_varVals[$k] .= $v : $this->_varVals[$k] = $v;
+                ($append) ? $this->_varVals[$k] .= $v
+                          : $this->_varVals[$k] = $v;
             }
         }
     }
@@ -245,9 +275,10 @@ class HTML_Template_PHPLIB
     /**
      * Substitute variables in handle $handle
      *
+     * @param string $handle Name of handle
+     *
+     * @return mixed String substituted content of handle
      * @access public
-     * @param  string name of handle
-     * @return mixed string substituted content of handle
      */
     function subst($handle)
     {
@@ -256,16 +287,18 @@ class HTML_Template_PHPLIB
             return false;
         }
 
-        return @str_replace($this->_varKeys, $this->_varVals, $this->getVar($handle));
+        return @str_replace($this->_varKeys,
+                            $this->_varVals, $this->getVar($handle));
     }
 
     /**
      * Same as subst but printing the result
      *
-     * @access  public
-     * @brother subst
-     * @param   string handle of template
-     * @return  bool always false
+     * @param string $handle Handle of template
+     *
+     * @return bool always false
+     * @access public
+     * @see subst
      */
     function pSubst($handle)
     {
@@ -280,18 +313,20 @@ class HTML_Template_PHPLIB
      * appending handle at $target if $append is defined
      * as TRUE.
      *
-     * @access public
-     * @param  string target handle to parse into
-     * @param  string which handle should be parsed
-     * @param  boolean append it to $target or not?
+     * @param string  $target Target handle to parse into
+     * @param string  $handle Which handle should be parsed
+     * @param boolean $append Append it to $target or not?
+     *
      * @return string parsed handle
+     * @access public
      */
     function parse($target, $handle, $append = false)
     {
         if (!is_array($handle)) {
             $str = $this->subst($handle);
 
-            ($append) ? $this->setVar($target, $this->getVar($target) . $str) : $this->setVar($target, $str);
+            ($append) ? $this->setVar($target, $this->getVar($target) . $str)
+                      : $this->setVar($target, $str);
         } else {
             reset($handle);
 
@@ -307,12 +342,13 @@ class HTML_Template_PHPLIB
     /**
      * Same as parse, but printing it.
      *
-     * @access  public
-     * @brother parse
-     * @param   string target to parse into
-     * @param   string handle which should be parsed
-     * @param   should $handle be appended to $target?
-     * @return  bool
+     * @param string $target Target to parse into
+     * @param string $handle Handle which should be parsed
+     * @param should $append If $handle shall be appended to $target?
+     *
+     * @return bool
+     * @access public
+     * @see parse
      */
     function pParse($target, $handle, $append = false)
     {
@@ -323,8 +359,8 @@ class HTML_Template_PHPLIB
     /**
      * Return all defined variables and their values
      *
-     * @access public
      * @return array with all defined variables and their values
+     * @access public
      */
     function getVars()
     {
@@ -340,9 +376,12 @@ class HTML_Template_PHPLIB
     /**
      * Return one or more specific variable(s) with their values.
      *
+     * @param mixed $varname Array with variable names
+     *                       or one variable name as a string
+     *
+     * @return mixed Array of variable names with their values
+     *               or value of one specific variable
      * @access public
-     * @param  mixed array with variable names or one variable name as a string
-     * @return mixed array of variable names with their values or value of one specific variable
      */
     function getVar($varname)
     {
@@ -356,7 +395,8 @@ class HTML_Template_PHPLIB
             reset($varname);
 
             while (list($k, ) = each($varname)) {
-                $result[$k] = (isset($this->_varVals[$k])) ? $this->_varVals[$k] : '';
+                $result[$k] = (isset($this->_varVals[$k]))
+                    ? $this->_varVals[$k] : '';
             }
 
             return $result;
@@ -366,9 +406,10 @@ class HTML_Template_PHPLIB
     /**
      * Get undefined values of a handle
      *
+     * @param string $handle Handle name
+     *
+     * @return mixed False if an error occured or the array of undefined values
      * @access public
-     * @param  string handle name
-     * @return mixed  false if an error occured or the undefined values
      */
     function getUndefined($handle)
     {
@@ -400,20 +441,22 @@ class HTML_Template_PHPLIB
     /**
      * Finish string
      *
-     * @access public
-     * @param  string string to finish
+     * @param string $str String to finish
+     *
      * @return finished, i.e. substituted string
+     * @access public
      */
     function finish($str)
     {
         switch ($this->unknowns) {
-            case 'remove':
-                $str = preg_replace('/{[^ \t\r\n}]+}/', '', $str);
-                break;
+        case 'remove':
+            $str = preg_replace('/{[^ \t\r\n}]+}/', '', $str);
+            break;
 
-            case 'comment':
-                $str = preg_replace('/{([^ \t\r\n}]+)}/', '<!-- Template variable \\1 undefined -->', $str);
-                break;
+        case 'comment':
+            $str = preg_replace('/{([^ \t\r\n}]+)}/',
+                '<!-- Template variable \\1 undefined -->', $str);
+            break;
         }
 
         return $str;
@@ -422,8 +465,10 @@ class HTML_Template_PHPLIB
     /**
      * Print variable to the browser
      *
+     * @param string $varname Name of variable to print
+     *
+     * @return void
      * @access public
-     * @param  string name of variable to print
      */
     function p($varname)
     {
@@ -433,9 +478,10 @@ class HTML_Template_PHPLIB
     /**
      * Get finished variable
      *
-     * @access public public
-     * @param  string variable to get
+     * @param string $varname Name of variable to get
+     *
      * @return string string with finished variable
+     * @access public public
      */
     function get($varname)
     {
@@ -447,8 +493,9 @@ class HTML_Template_PHPLIB
      *
      * Complete filename, i.e. testing it for slashes
      *
+     * @param string $filename Filename to be completed
+     *
      * @access private
-     * @param  string filename to be completed
      * @return string completed filename
      */
     function _filename($filename)
@@ -461,7 +508,9 @@ class HTML_Template_PHPLIB
         if (is_array($this->file_fallbacks) && count($this->file_fallbacks) > 0) {
             reset($this->file_fallbacks);
             while (list(,$v) = each($this->file_fallbacks)) {
-                if (file_exists($v.basename($filename))) return $v.basename($filename);
+                if (file_exists($v.basename($filename))) {
+                    return $v.basename($filename);
+                }
             }
             $this->halt(sprintf(
                 'filename: file %s does not exist in the fallback paths %s.',
@@ -480,9 +529,10 @@ class HTML_Template_PHPLIB
     /**
      * Protect a replacement variable
      *
-     * @access private
-     * @param  string name of replacement variable
+     * @param string $varname name of replacement variable
+     *
      * @return string replaced variable
+     * @access private
      */
     function _varname($varname)
     {
@@ -492,9 +542,10 @@ class HTML_Template_PHPLIB
     /**
      * load file defined by handle if it is not loaded yet
      *
+     * @param string $handle File handle
+     *
+     * @return bool False if error, true if all is ok
      * @access private
-     * @param  string handle
-     * @return bool   FALSE if error, true if all is ok
      */
     function _loadFile($handle)
     {
@@ -516,7 +567,7 @@ class HTML_Template_PHPLIB
                 return false;
             }
 
-            $str = fread($fp,filesize($filename));
+            $str = fread($fp, filesize($filename));
             fclose($fp);
         }
 
@@ -534,9 +585,10 @@ class HTML_Template_PHPLIB
     /**
      * Error function. Halt template system with message to show
      *
-     * @access public
-     * @param  string message to show
+     * @param string $msg message to show
+     *
      * @return bool
+     * @access public
      */
     function halt($msg)
     {
@@ -552,21 +604,30 @@ class HTML_Template_PHPLIB
     /**
      * printf error message to show
      *
-     * @access public
-     * @param  string message to show
+     * @param string $msg message to show
+     *
      * @return object PEAR error object
+     * @access public
      */
     function haltMsg($msg)
     {
         require_once 'PEAR.php';
-        return PEAR::raiseError(sprintf('<b>Template Error:</b> %s<br>' . "\n", $msg));
+        return PEAR::raiseError(sprintf('<b>Template Error:</b> %s<br>'
+             . "\n", $msg));
     }
 }
 
 /**
-*   Backwards-compatibility for HTML_Template_PHPLIB.
-*   Used to have this name here.
-*/
+ * Backwards-compatibility for HTML_Template_PHPLIB.
+ * Used to have this name here.
+ *
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Christian Weiske <cweiske@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
+ */
 class Template_PHPLIB extends HTML_Template_PHPLIB
 {
 }
