@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.11"
-    version="2.0"
-    xmlns="http://pear.php.net/dtd/package-2.0"
-    xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
-http://pear.php.net/dtd/tasks-1.0.xsd
-http://pear.php.net/dtd/package-2.0
-http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>HTML_Template_PHPLIB</name>
  <channel>pear.php.net</channel>
  <summary>preg_* based template system.</summary>
  <description>The popular Template system from PHPLIB ported to PEAR. It has some
-features that can&apos;t be found currently in the original version like
+features that can't be found currently in the original version like
 fallback paths. It has minor improvements and cleanup in the code as
-well as some speed improvements.
- </description>
+well as some speed improvements.</description>
  <lead>
   <name>Björn Schotte</name>
   <user>bjoern</user>
@@ -28,10 +19,11 @@ well as some speed improvements.
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2007-04-24</date>
+ <date>2007-07-08</date>
+ <time>12:50:38</time>
  <version>
-  <release>1.3.2</release>
-  <api>1.3.1</api>
+  <release>1.3.3</release>
+  <api>1.3.3</api>
  </version>
  <stability>
   <release>stable</release>
@@ -39,53 +31,40 @@ well as some speed improvements.
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  Bugfix release:
-  - fixing bug #6945: undefined variable notice in function finish($str)
-  - class name is HTML_Template_PHPLIB now
-  - package.xml v2
-  - unit tests
-  - cweiske is lead now
+  - method to retrieve last error
+  - fix return values in getFile
  </notes>
  <contents>
   <dir name="/">
-   <dir name="HTML">
-    <dir name="Template">
-     <file name="PHPLIB.php" role="php"/>
-    </dir>
-   </dir>
-   <!-- examples -->
-   <dir name="examples">
-    <file baseinstalldir="HTML/Template" name="authors.tpl" role="doc" />
-    <file baseinstalldir="HTML/Template" name="authors.php" role="doc" />
-    <file baseinstalldir="HTML/Template" name="block.ihtml" role="doc" />
-    <file baseinstalldir="HTML/Template" name="block.php" role="doc" />
-    <file baseinstalldir="HTML/Template" name="ittest.php" role="doc" />
-    <file baseinstalldir="HTML/Template" name="README" role="doc" />
-    <file baseinstalldir="HTML/Template" name="tpl1.ihtml" role="doc" />
-    <file baseinstalldir="HTML/Template" name="tpl1.php" role="doc" />
-   </dir>
-   <!-- unittests -->
-   <dir name="tests">
-    <file name="AllTests.php" role="test"/>
-    <file name="HTML_Template_PHPLIBTest.php" role="test"/>
-    <file name="file.tpl" role="test"/>
-   </dir>
+   <file name="examples/authors.php" role="doc" />
+   <file name="examples/authors.tpl" role="doc" />
+   <file name="examples/block.ihtml" role="doc" />
+   <file name="examples/block.php" role="doc" />
+   <file name="examples/ittest.php" role="doc" />
+   <file name="examples/README" role="doc" />
+   <file name="examples/tpl1.ihtml" role="doc" />
+   <file name="examples/tpl1.php" role="doc" />
+   <file name="HTML/Template/PHPLIB.php" role="php" />
+   <file name="tests/AllTests.php" role="test" />
+   <file name="tests/HTML_Template_PHPLIBTest.php" role="test" />
+   <file name="tests/templates/block.tpl" role="test" />
+   <file name="tests/templates/block2.tpl" role="test" />
+   <file name="tests/templates/block3.tpl" role="test" />
+   <file name="tests/templates/simple.tpl" role="test" />
+   <file name="tests/templates/simple2.tpl" role="test" />
   </dir>
  </contents>
-
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>4.4.0</min>
    </php>
    <pearinstaller>
     <min>1.4.0b1</min>
    </pearinstaller>
   </required>
  </dependencies>
-
  <phprelease />
-
  <changelog>
   <release>
    <version>
@@ -98,11 +77,8 @@ well as some speed improvements.
    </stability>
    <date>2001-09-04</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    This is the initial independent release of the Template_PHPLIB package.
-   </notes>
+   <notes>This is the initial independent release of the Template_PHPLIB package.</notes>
   </release>
-
   <release>
    <version>
     <release>1.1</release>
@@ -114,11 +90,8 @@ well as some speed improvements.
    </stability>
    <date>2002-04-28</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    Renamed to HTML_PHPLIB_Template.
-   </notes>
+   <notes>Renamed to HTML_PHPLIB_Template.</notes>
   </release>
-
   <release>
    <version>
     <release>1.1.1</release>
@@ -130,11 +103,8 @@ well as some speed improvements.
    </stability>
    <date>2003-02-01</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    Fix warning when using error_reporting(E_ALL).
-   </notes>
+   <notes>Fix warning when using error_reporting(E_ALL).</notes>
   </release>
-
   <release>
    <version>
     <release>1.2</release>
@@ -146,11 +116,8 @@ well as some speed improvements.
    </stability>
    <date>2003-02-12</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    Removed a serious bug concerning the loadfile method.
-   </notes>
+   <notes>Removed a serious bug concerning the loadfile method.</notes>
   </release>
-
   <release>
    <version>
     <release>1.3</release>
@@ -162,17 +129,14 @@ well as some speed improvements.
    </stability>
    <date>2003-06-03</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    - added examples with use of Benchmark_Timer
-    - added fallback template paths, i.e. first search
-      in &quot;./&quot; and then in &quot;/www/myinstall/mastertemplates/A/&quot;
-      and then in &quot;/www/myinstall/mastertemplates/B/&quot;
-    - got rid of implode(...,file()) and using file_get_contents()
-      if available (PHP &gt;= 4.3.0)
-    - some minor improvements and cleanup in the code
-   </notes>
+   <notes>- added examples with use of Benchmark_Timer
+- added fallback template paths, i.e. first search
+  in &quot;./&quot; and then in &quot;/www/myinstall/mastertemplates/A/&quot;
+  and then in &quot;/www/myinstall/mastertemplates/B/&quot;
+- got rid of implode(...,file()) and using file_get_contents()
+  if available (PHP &gt;= 4.3.0)
+- some minor improvements and cleanup in the code</notes>
   </release>
-
   <release>
    <version>
     <release>1.3.1</release>
@@ -184,11 +148,8 @@ well as some speed improvements.
    </stability>
    <date>2003-06-11</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-    Bugfix release, update recommended if you use PHP &lt;=4.3.0
-   </notes>
+   <notes>Bugfix release, update recommended if you use PHP &lt;=4.3.0</notes>
   </release>
-
   <release>
    <version>
     <release>1.3.2</release>
@@ -200,14 +161,25 @@ well as some speed improvements.
    </stability>
    <date>2007-04-24</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>
-  Bugfix release:
-  - fixing bug #6945: undefined variable notice in function finish($str)
-  - class name is HTML_Template_PHPLIB now
-  - package.xml v2
-  - unit tests
-  - cweiske is lead now
-   </notes>
+   <notes>Bugfix release:
+- fixing bug #6945: undefined variable notice in function finish($str)
+- class name is HTML_Template_PHPLIB now
+- package.xml v2
+- unit tests
+- cweiske is lead now</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.3</release>
+    <api>1.3.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-07-08</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>- method to retrieve last error</notes>
   </release>
  </changelog>
 </package>
