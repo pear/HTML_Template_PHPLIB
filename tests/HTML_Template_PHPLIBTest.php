@@ -234,6 +234,16 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase {
             $this->tpl->get('TMP')
         );
     }
+    
+    
+    
+    public function testIsAbsolute()
+    {
+        $this->assertTrue($this->tpl->_isAbsolute('/home/user/project/template.tpl'));
+        $this->assertTrue($this->tpl->_isAbsolute('C:\\Documents And Settings\\User\\template.tpl'));
+        $this->assertFalse($this->tpl->_isAbsolute('templates/file.tpl'));
+        $this->assertFalse($this->tpl->_isAbsolute('./templates/file.tpl'));
+    }
 }
 
 // Call HTML_Template_PHPLIBTest::main() if this source file is executed directly.

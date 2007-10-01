@@ -507,7 +507,7 @@ class HTML_Template_PHPLIB
      */
     function _filename($filename)
     {
-        if (substr($filename, 0, 1) != '/') {
+        if (!$this->_isAbsolute($filename)) {
             $filename = $this->root . '/' . $filename;
         }
 
@@ -531,6 +531,26 @@ class HTML_Template_PHPLIB
         }
 
         return $filename;
+    }
+    
+    
+    /**
+     * Tells you whether a filename is absolute or relative
+     *
+     * @param string $filename Filename to check
+     *
+     * @return boolean true if the filename is absolute
+     */
+    function _isAbsolute($filename)
+    {
+        if (substr($filename, 0, 1) == '/') {
+            //unix
+            return true;
+        } else if (substr($filename, 1, 2) == ':\\') {
+            //windows
+            return true;
+        }
+        return false;
     }
 
     /**
