@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+require_once 'HTML/Template/PHPLIB/Tool.php';
+HTML_Template_PHPLIB_Tool::run();
+?>

@@ -43,10 +43,32 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
     }
+    
+    
+    
+    public function testValidate()
+    {
+        $this->assertFalse(HTML_Template_PHPLIB_Validator::validate());
+        $this->assertTrue(HTML_Template_PHPLIB_Validator::validate(null, ''));
+
+        $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '<!-- BEGIN block -->');
+        $this->assertType('array', $arErrors);
+        $this->assertEquals(1, count($arErrors));
+        
+        $name = tempnam('/tmp', 'HTML_Template_PHPLIB-test');
+        file_put_contents($name, '<!-- BEGIN blo -->');
+        $arErrors = HTML_Template_PHPLIB_Validator::validate($name);
+        $this->assertType('array', $arErrors);
+        $this->assertEquals(1, count($arErrors));
+        unlink($name);
+    }//public function testValidate()
+
+
 
     /**
      */
-    public function testCheckBlockDefinitions() {
+    public function testCheckBlockDefinitions()
+    {
         $cont = <<<EOT
 <!-- BEGIN one -->
 <!-- END one -->
@@ -60,6 +82,7 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase {
 <!--END five-->
 <!--BEGINsix-->
 <!--ENDsix-->
+<!-- BEGIN  -->
 EOT;
         $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($cont);
         $arErrors = self::stripMessages($arErrors);
@@ -146,6 +169,16 @@ array (
     'line' => 12,
     'code' => '<!--ENDsix-->',
   ),
+  array (
+    'short' => 'MISSING_BLOCK_NAME',
+    'line' => 13,
+    'code' => '<!-- BEGIN  -->'
+  ),
+  array (
+    'short' => 'MISSING_SPACE',
+    'line' => 13,
+    'code' => '<!-- BEGIN  -->',
+  )
 ),
             $arErrors
         );
