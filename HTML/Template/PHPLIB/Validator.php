@@ -89,7 +89,46 @@ class HTML_Template_PHPLIB_Validator
          /**
          * Check if all open blocks have a close counterpart
          */
-
+         foreach ($arBlockOpen as $strBlockName => $arLines) {
+             if (count($arLines) > 1) {
+                 $arErrors[] = array(
+                     'short'   => 'DUPLICATE_BLOCK',
+                     'message' => 'Block "' . $strBlockName . '" is opened'
+                                . ' several times on lines ' . implode(', ', $arLines),
+                     'line'    => $arLines[0],
+                     'code'    => $strBlockName
+                 );
+             }
+             if (!isset($arBlockClose[$strBlockName])) {
+                 $arErrors[] = array(
+                     'short'   => 'UNFINISHED_BLOCK',
+                     'message' => 'Block "' . $strBlockName . '" is not closed.',
+                     'line'    => $arLines[0],
+                     'code'    => $strBlockName
+                 );
+             }
+         }
+         foreach ($arBlockClose as $strBlockName => $arLines) {
+             if (count($arLines) > 1) {
+                 $arErrors[] = array(
+                     'short'   => 'DUPLICATE_BLOCK',
+                     'message' => 'Block "' . $strBlockName . '" is closed'
+                                . ' several times on lines ' . implode(', ', $arLines),
+                     'line'    => $arLines[0],
+                     'code'    => $strBlockName
+                 );
+             }
+             if (!isset($arBlockOpen[$strBlockName])) {
+                 $arErrors[] = array(
+                     'short'   => 'UNFINISHED_BLOCK',
+                     'message' => 'Block "' . $strBlockName . '" is closed but not opened.',
+                     'line'    => $arLines[0],
+                     'code'    => $strBlockName
+                 );
+             }
+         }
+         
+         //TODO: Check proper nesting
          
          return $arErrors;
     }//function checkBlockDefinitions($strContent)

@@ -149,8 +149,48 @@ array (
 ),
             $arErrors
         );
+
+        //missing opening or closing blocks
+        $cont = <<<EOT
+<!-- BEGIN one -->
+<!-- BEGIN two -->
+<!-- END two -->
+<!-- END three -->
+<!-- BEGIN four -->
+<!-- BEGIN four -->
+<!-- END four -->
+<!-- BEGIN five -->
+<!-- END five -->
+<!-- END five -->
+EOT;
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($cont);
+        $arErrors = self::stripMessages($arErrors);
+        $this->assertEquals(
+array (
+  array (
+    'short' => 'UNFINISHED_BLOCK',
+    'line' => 1,
+    'code' => 'one',
+  ),
+  array (
+    'short' => 'DUPLICATE_BLOCK',
+    'line' => 5,
+    'code' => 'four',
+  ),
+  array (
+    'short' => 'UNFINISHED_BLOCK',
+    'line' => 4,
+    'code' => 'three',
+  ),
+  array (
+    'short' => 'DUPLICATE_BLOCK',
+    'line' => 9,
+    'code' => 'five',
+  ),
+),
+            $arErrors
+        );
     }
-    
     
     
     protected static function stripMessages($arErrors)
