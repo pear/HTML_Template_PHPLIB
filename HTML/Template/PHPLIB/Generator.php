@@ -16,6 +16,10 @@ class HTML_Template_PHPLIB_Generator
     /**
     * Creates the code to use a given template file
     *
+    * @param string $strFile    Template file
+    * @param string $strTplName Template reference name
+    * @param string $strPrefix  Prefix to prepend before the code
+    *
     * @return string PHP code
     */
     function getCodeBlockDefinition($strFile, $strTplName = null, $strPrefix = '$tpl')
@@ -28,8 +32,8 @@ class HTML_Template_PHPLIB_Generator
             $strTplName = HTML_Template_PHPLIB_Generator::getTemplateNameFromFilename($strFile);
         }
 
-        $nl   = "\r\n";
-        $code = '';
+        $nl    = "\r\n";
+        $code  = '';
         $code .= $strPrefix . ' = new HTML_Template_PHPLIB();' . $nl;
         $code .= HTML_Template_PHPLIB_Generator::getCodeBlock($arBlocks, $strTplName, $strPrefix);
         $code .= $nl;
@@ -78,12 +82,11 @@ class HTML_Template_PHPLIB_Generator
     * The array values are array with a key "name" and
     *  "sub", an array of nested blocks.
     *
-    * @param string $strContent Template code
+    * @param array $arLines Template code lines
     *
     * @return array Array of blocks
     *
     * @static
-    * @protected
     */
     function getBlocks($arLines)
     {

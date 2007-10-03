@@ -28,7 +28,6 @@ class HTML_Template_PHPLIB_Validator
     *                - 'code'    (code that caused the error)
     *                false if no file and content is given
     *
-    * @public
     * @static
     */
     function validate($strFile = null, $strContent = null)
@@ -55,7 +54,6 @@ class HTML_Template_PHPLIB_Validator
     * @return array Array of errors/warnings. An error/warning is an array
     *                of several keys: message, line
     *
-    * @protected
     * @static
     */
     function checkBlockDefinitions($arLines)
