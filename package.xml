@@ -19,10 +19,10 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2007-10-01</date>
- <time>20:46:00</time>
+ <date>2007-10-04</date>
+ <time>00:15:00</time>
  <version>
-  <release>1.4.0a1</release>
+  <release>1.4.0a2</release>
   <api>1.3.3</api>
  </version>
  <stability>
@@ -31,8 +31,8 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  - Fix bug #11889: function _filename() not works well on Windows [cweiske]
-  - Add command line tool to validate template files
+  - Fix bug #12168: script binary installed into wrong path [cweiske]
+  - Command line tool can generate PHP code now (part of request #12169) [cweiske]
  </notes>
  <contents>
   <dir name="/">
@@ -54,6 +54,8 @@ well as some speed improvements.</description>
     <dir name="Template">
      <file name="PHPLIB.php"     role="php" />
      <dir  name="PHPLIB">
+      <file name="Generator.php" role="php" />
+      <file name="Helper.php"    role="php" />
       <file name="Tool.php"      role="php" />
       <file name="Validator.php" role="php" />
      </dir>
@@ -63,6 +65,8 @@ well as some speed improvements.</description>
    <dir name="tests">
     <file name="AllTests.php"                           role="test" />
     <file name="HTML_Template_PHPLIBTest.php"           role="test" />
+    <file name="HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
+    <file name="HTML_Template_PHPLIB_HelperTest.php"    role="test" />
     <file name="HTML_Template_PHPLIB_ValidatorTest.php" role="test" />
     <dir name="templates">
      <file name="block.tpl"   role="test" />
@@ -217,6 +221,23 @@ well as some speed improvements.</description>
    <notes>
   - Fix bug #11889: function _filename() not works well on Windows [cweiske]
   - Add command line tool to validate template files
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.4.0a2</release>
+    <api>1.3.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-10-04</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+  - Fix bug #12168: script binary installed into wrong path [cweiske]
+  - Command line tool can generate PHP code now (part of request #12169) [cweiske]
    </notes>
   </release>
  </changelog>
