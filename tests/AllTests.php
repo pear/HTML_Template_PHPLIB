@@ -9,6 +9,8 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 
 chdir(dirname(__FILE__));
 require_once 'HTML_Template_PHPLIBTest.php';
+require_once 'HTML_Template_PHPLIB_GeneratorTest.php';
+require_once 'HTML_Template_PHPLIB_ValidatorTest.php';
 
 
 class HTML_Template_PHPLIB_AllTests
@@ -24,6 +26,8 @@ class HTML_Template_PHPLIB_AllTests
         $suite = new PHPUnit_Framework_TestSuite('HTML_Template_PHPLIB Tests');
         /** Add testsuites, if there is. */
         $suite->addTestSuite('HTML_Template_PHPLIBTest');
+        $suite->addTestSuite('HTML_Template_PHPLIB_ValidatorTest');
+        $suite->addTestSuite('HTML_Template_PHPLIB_GeneratorTest');
 
         return $suite;
     }

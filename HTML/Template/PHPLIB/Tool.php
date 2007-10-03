@@ -4,7 +4,7 @@
 * Command line tool to use the HTML_Template_PHPLIB validator and generator.
 *
 * @category HTML
-* @package HTML_Template_PHPLIB
+* @package  HTML_Template_PHPLIB
 * @author   Christian Weiske <cweiske@php.net>
 * @license  http://www.gnu.org/copyleft/lesser.html LGPL License 2.1
 * @link     http://pear.php.net/package/HTML_Template_PHPLIB
@@ -14,11 +14,32 @@ class HTML_Template_PHPLIB_Tool
     function HTML_Template_PHPLIB_Tool($args)
     {
         $strAction = $this->getAction($args);
-        $this->{'do' . ucfirst($strAction)}($args);        
+        $this->{'do' . ucfirst($strAction)}($args);
     }//function HTML_Template_PHPLIB_Tool($args)
-    
-    
-    
+
+
+
+    /**
+    * Start the tool
+    *
+    * @static
+    */
+    function run()
+    {
+        $args = $GLOBALS['argv'];
+        array_shift($args);
+        new HTML_Template_PHPLIB_Tool($args);
+    }//function run()
+
+
+
+    /**
+    * Returns the action to execute
+    *
+    * @param array &$args Array of command line arguments
+    *
+    * @return string Action to execute
+    */
     function getAction(&$args)
     {
         if (count($args) == 0) {
@@ -31,21 +52,40 @@ class HTML_Template_PHPLIB_Tool
         case '-v':
         case '--validate':
             return 'validate';
+        case 'g':
+        case 'generate':
+        case '-g':
+        case '--generate':
+            return 'generate';
         default:
             return 'help';
         }
     }//function getAction(&$args)
-    
-    
-    
+
+
+
+    /**
+    * Echoes the message and exist php with the given
+    *  exit code
+    *
+    * @param string $strMessage Message to display
+    * @param int    $nExitCode  Exit code
+    *
+    * @return void
+    */
     function dieHard($strMessage, $nExitCode)
     {
         echo $strMessage;
         exit($nExitCode);
     }//function dieHard($strMessage, $nExitCode)
-    
-    
-    
+
+
+
+    /**
+    * Prints the help message to stdout
+    *
+    * @return void
+    */
     function doHelp()
     {
         echo <<<EOT
@@ -55,19 +95,27 @@ Tool to validate and work with HTML templates
 
 mode: (- and -- are optional)
  h,  help      Show this help screen
+ g,  generate  Generate PHP code for the template
  v,  validate  Validate a template file
 
 EOT;
     }//function doHelp()
-    
-    
-    
+
+
+
+    /**
+    * Validates the files given on the cmdline
+    *
+    * @param array $args Command line arguments (files)
+    *
+    * @return void
+    */
     function doValidate($args)
     {
         if (count($args) == 0) {
             $this->dieHard("No template files to validate\n", 1);
         }
-        
+
         require_once 'HTML/Template/PHPLIB/Validator.php';
         $nError = 0;
         foreach ($args as $file) {
@@ -97,16 +145,26 @@ EOT;
 
 
     /**
-    * Start the tool
+    * Generates PHP code for the given template file
     *
-    * @static
+    * @param array $args Command line arguments
+    *
+    * @return void
     */
-    function run()
+    function doGenerate($args)
     {
-        $args = $GLOBALS['argv'];
-        array_shift($args);
-        new HTML_Template_PHPLIB_Tool($args);        
-    }//function run()
+        if (count($args) == 0) {
+            $this->dieHard("No template file given\n", 1);
+        }
+
+        $strFile = $args[0];
+        require_once 'HTML/Template/PHPLIB/Generator.php';
+        $strCode = HTML_Template_PHPLIB_Generator::getCodeBlockDefinition(
+            $strFile
+        );
+
+        $this->dieHard($strCode, 0);
+    }//function doGenerate($args)
 
 }//class HTML_Template_PHPLIB_Tool
 

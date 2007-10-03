@@ -36,9 +36,7 @@ well as some speed improvements.</description>
  </notes>
  <contents>
   <dir name="/">
-   <dir name="bin">
-    <file name="html_template_phplibtool" role="script" />
-   </dir>
+   <file name="bin/html_template_phplibtool" role="script" install-as="html_template_phplibtool" />
 
    <dir name="examples">
     <file name="authors.php" role="doc" />

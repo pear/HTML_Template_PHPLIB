@@ -1,4 +1,5 @@
 <?php
+require_once 'HTML/Template/PHPLIB/Helper.php';
 
 /**
 * Class to validate templates (syntax checks)
@@ -32,13 +33,11 @@ class HTML_Template_PHPLIB_Validator
     */
     function validate($strFile = null, $strContent = null)
     {
-        if ($strFile !== null) {
-            $strContent = file_get_contents($strFile);
-        } else if ($strContent === null) {
+        $arLines = HTML_Template_PHPLIB_Helper::getLines($strFile, $strContent);
+        if ($arLines === false) {
             return false;
         }
-        
-        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($strContent);
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($arLines);
 
         HTML_Template_PHPLIB_Validator::sortByLine($arErrors);
 
@@ -51,7 +50,7 @@ class HTML_Template_PHPLIB_Validator
     * Check if all block definitions have a closing counterpart
     * and if the block comments have all the required spaces
     *
-    * @param string $strContent Template content
+    * @param array $arLines Array of template code lines
     *
     * @return array Array of errors/warnings. An error/warning is an array
     *                of several keys: message, line
@@ -59,17 +58,14 @@ class HTML_Template_PHPLIB_Validator
     * @protected
     * @static
     */
-    function checkBlockDefinitions($strContent)
+    function checkBlockDefinitions($arLines)
     {
-        $arLines = explode(
-            "\n", str_replace(array("\r\n", "\r"), "\n", $strContent)
-        );
         //Array of block definitions found.
         // key is the block name, value is an array of line numbers
         $arBlockOpen  = array();
         $arBlockClose = array();
         $arErrors     = array();
-        
+
         $strRegex = '/<!--(\s*)(BEGIN|END)(\s*)([a-zA-Z0-9_]*)(\s*)-->/';
         foreach ($arLines as $nLine => $strLine) {
             if (preg_match($strRegex, $strLine, $arMatches)) {
@@ -95,7 +91,7 @@ class HTML_Template_PHPLIB_Validator
                         'message' => 'Space missing between ' . $strType . ' and block name',
                         'line'    => $nLine,
                         'code'    => $strLine
-                    );                     
+                    );
                 }
                 if ($arMatches[4] == '') {
                     //block name missing
@@ -119,8 +115,8 @@ class HTML_Template_PHPLIB_Validator
                 }
             }
         }
-        
-        
+
+
         /**
         * Check if all open blocks have a close counterpart
         */
@@ -162,14 +158,14 @@ class HTML_Template_PHPLIB_Validator
                 );
             }
         }
-        
+
         //TODO: Check proper nesting
-        
+
         return $arErrors;
-    }//function checkBlockDefinitions($strContent)
-    
-    
-    
+    }//function checkBlockDefinitions($arLines)
+
+
+
     /**
     * Sorts the given error array by line numbers
     *
@@ -184,9 +180,9 @@ class HTML_Template_PHPLIB_Validator
         }
         usort($arErrors, array(__CLASS__, 'intcmpLine'));
     }//function sortByLine(&$arErrors)
-    
-    
-    
+
+
+
     /**
     * Compares the two error arrays by line number
     *
