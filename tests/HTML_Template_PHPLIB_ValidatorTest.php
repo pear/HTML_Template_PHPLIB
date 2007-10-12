@@ -43,9 +43,9 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
     }
-    
-    
-    
+
+
+
     public function testValidate()
     {
         $this->assertFalse(HTML_Template_PHPLIB_Validator::validate());
@@ -54,7 +54,7 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase {
         $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '<!-- BEGIN block -->');
         $this->assertType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
-        
+
         $name = tempnam('/tmp', 'HTML_Template_PHPLIB-test');
         file_put_contents($name, '<!-- BEGIN blo -->');
         $arErrors = HTML_Template_PHPLIB_Validator::validate($name);
@@ -84,7 +84,9 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase {
 <!--ENDsix-->
 <!-- BEGIN  -->
 EOT;
-        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($cont);
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions(
+            HTML_Template_PHPLIB_Helper::getLines(null, $cont)
+        );
         $arErrors = self::stripMessages($arErrors);
 
         $this->assertEquals(
@@ -196,7 +198,9 @@ array (
 <!-- END five -->
 <!-- END five -->
 EOT;
-        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($cont);
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions(
+            HTML_Template_PHPLIB_Helper::getLines(null, $cont)
+        );
         $arErrors = self::stripMessages($arErrors);
         $this->assertEquals(
 array (
@@ -224,8 +228,8 @@ array (
             $arErrors
         );
     }
-    
-    
+
+
     protected static function stripMessages($arErrors)
     {
         foreach ($arErrors as $nId => &$arError) {

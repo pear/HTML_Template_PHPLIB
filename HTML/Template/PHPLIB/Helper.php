@@ -19,7 +19,8 @@ class HTML_Template_PHPLIB_Helper
     * @param string $strFile    File name
     * @param string $strContent Template code
     *
-    * @return array Array with text lines, without trailing newlines
+    * @return array Array with text lines, without trailing newlines,
+    *                false when both are null
     *
     * @static
     */
@@ -29,6 +30,9 @@ class HTML_Template_PHPLIB_Helper
             $arLines = HTML_Template_PHPLIB_Helper::splitLines($strContent);
         } else if ($strFile !== null) {
             $arLines = file($strFile, FILE_IGNORE_NEW_LINES);
+        } else {
+            //all null?
+            return false;
         }
 
         return $arLines;
