@@ -54,6 +54,7 @@ class HTML_Template_PHPLIB_GeneratorTest extends PHPUnit_Framework_TestCase {
  <!-- BEGIN three -->
   <!-- BEGIN four -->
    <!-- BEGIN six -->
+    some text
    <!-- END six -->
   <!-- END four -->
  <!-- END three -->

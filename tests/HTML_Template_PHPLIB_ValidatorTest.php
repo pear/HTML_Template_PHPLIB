@@ -268,6 +268,32 @@ array(
 
 
 
+    public function testIntcmpLine()
+    {
+        $ar1 = array('line' => 1);
+        $ar2 = array('line' => 2);
+        $this->assertEquals(
+            -1,
+            HTML_Template_PHPLIB_Validator::intcmpLine($ar1, $ar2)
+        );
+
+        $ar1 = array('line' => 2);
+        $ar2 = array('line' => 1);
+        $this->assertEquals(
+            1,
+            HTML_Template_PHPLIB_Validator::intcmpLine($ar1, $ar2)
+        );
+
+        $ar1 = array('line' => 2);
+        $ar2 = array('line' => 2);
+        $this->assertEquals(
+            0,
+            HTML_Template_PHPLIB_Validator::intcmpLine($ar1, $ar2)
+        );
+    }
+
+
+
     /**
     * Helper method that removes "message" keys from error arrays
     */
