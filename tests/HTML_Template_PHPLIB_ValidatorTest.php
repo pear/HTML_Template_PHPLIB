@@ -233,6 +233,16 @@ array (
     'line' => 9,
     'code' => 'five',
   ),
+  array (
+    'short' => 'WRONG_NESTING',
+    'line' => 4,
+    'code' => '<!-- END three -->',
+  ),
+  array (
+    'short' => 'WRONG_NESTING',
+    'line' => 10,
+    'code' => '<!-- END five -->',
+  ),
 ),
             $arErrors
         );
@@ -253,7 +263,6 @@ EOT;
             HTML_Template_PHPLIB_Helper::getLines(null, $cont)
         );
         $arErrors = self::stripMessages($arErrors);
-        $this->assertEquals(1, count($arErrors));
         $this->assertEquals(
 array(
   array (
@@ -261,10 +270,41 @@ array(
     'line' => 2,
     'code' => 'one',
   ),
+  array (
+    'short' => 'WRONG_NESTING',
+    'line' => 1,
+    'code' => '<!-- END one -->',
+  ),
 ),
             $arErrors
         );
     }//public function testCheckBlockDefinitionsWrongOrder()
+
+
+
+    public function testCheckBlockDefinitionsWrongNesting()
+    {
+        $cont = <<<EOT
+<!-- BEGIN one -->
+<!-- BEGIN two -->
+<!-- END one -->
+<!-- END two -->
+EOT;
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions(
+            HTML_Template_PHPLIB_Helper::getLines(null, $cont)
+        );
+        $arErrors = self::stripMessages($arErrors);
+        $this->assertEquals(
+array (
+  array (
+    'short' => 'WRONG_NESTING',
+    'line' => 3,
+    'code' => '<!-- END one -->',
+  ),
+),
+            $arErrors
+        );
+    }//public function testCheckBlockDefinitionsWrongNesting()
 
 
 
@@ -290,7 +330,7 @@ array(
             0,
             HTML_Template_PHPLIB_Validator::intcmpLine($ar1, $ar2)
         );
-    }
+    }//public function testIntcmpLine()
 
 
 

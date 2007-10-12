@@ -60,6 +60,7 @@ class HTML_Template_PHPLIB_Validator
     {
         //Array of block definitions found.
         // key is the block name, value is an array of line numbers
+        $arBlocks     = array();
         $arBlockOpen  = array();
         $arBlockClose = array();
         $arErrors     = array();
@@ -101,6 +102,12 @@ class HTML_Template_PHPLIB_Validator
                     );
                 } else {
                     ${$strArName}[$strBlockName][] = $nLine;
+                    $arBlocks[] = array(
+                        'line' => $nLine,
+                        'code' => $strLine,
+                        'name' => $strBlockName,
+                        'open' => $strType == 'BEGIN'
+                    );
                 }
                 if ($arMatches[5] == '') {
                     //space missing between block name and -->
@@ -174,7 +181,35 @@ class HTML_Template_PHPLIB_Validator
         }
 
 
-        //TODO: Check proper nesting
+        /**
+        * Check proper nesting
+        */
+        $arStack = array();
+        foreach ($arBlocks as $arBlock) {
+            if ($arBlock['open']) {
+                $arStack[] = $arBlock['name'];
+            } else {
+                //closing block
+                if (end($arStack) == $arBlock['name']) {
+                    //all fine
+                    array_pop($arStack);
+                } else {
+                    //closing block is not the expected one
+                    $strStackName = end($arStack);
+                    if ($strStackName === null) {
+                        //no open block defined -> we already handle this
+                    } else {
+                        $arErrors[] = array(
+                            'short'   => 'WRONG_NESTING',
+                            'message' => 'Block "' . $arBlock['name'] . '" closed,'
+                                       . ' but  "' . $strStackName . '" is still open.',
+                            'line'    => $arBlock['line'],
+                            'code'    => $arBlock['code']
+                        );
+                    }
+                }
+            }
+        }
 
         return $arErrors;
     }//function checkBlockDefinitions($arLines)
