@@ -157,6 +157,23 @@ class HTML_Template_PHPLIB_Validator
             }
         }
 
+
+        /**
+        * Check correct order (that begin comes before end)
+        */
+        foreach ($arBlockOpen as $strBlockName => $arLines) {
+            if (isset($arBlockClose[$strBlockName])
+             && $arLines[0] > $arBlockClose[$strBlockName][0]) {
+                $arErrors[] = array(
+                    'short'   => 'WRONG_ORDER',
+                    'message' => 'BEGIN of block "' . $strBlockName . '" defined after END.',
+                    'line'    => $arLines[0],
+                    'code'    => $strBlockName
+                );
+            }
+        }
+
+
         //TODO: Check proper nesting
 
         return $arErrors;
