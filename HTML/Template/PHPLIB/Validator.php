@@ -37,6 +37,10 @@ class HTML_Template_PHPLIB_Validator
             return false;
         }
         $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions($arLines);
+        $arErrors = array_merge(
+            $arErrors,
+            HTML_Template_PHPLIB_Validator::checkVariables($arLines)
+        );
 
         HTML_Template_PHPLIB_Validator::sortByLine($arErrors);
 
@@ -213,6 +217,63 @@ class HTML_Template_PHPLIB_Validator
 
         return $arErrors;
     }//function checkBlockDefinitions($arLines)
+
+
+
+    /**
+    * Checks if the variables defined are correct
+    *
+    * @param array $arLines Array of template content lines
+    *
+    * @return array Array of error messages.
+    */
+    function checkVariables($arLines)
+    {
+        $arErrors   = array();
+        $strAllowed = 'a-zA-Z0-9_-';
+        $strRegex   = '/'
+            . '(?:'
+                . '(\{)'
+                . '(['  . $strAllowed . ']+)'
+                . '([^' . $strAllowed . ']|$)'
+            . '|'
+                . '([^' . $strAllowed . ']|^)'
+                . '(['  . $strAllowed . ']+)'
+                . '(\})'
+            . ')'
+            . '/';
+        $arLineMatches = array();
+        foreach ($arLines as $n => $strLine) {
+            if (preg_match_all($strRegex, $strLine, $arMatches) > 0) {
+                $arLineMatches[$n + 1] = $arMatches;
+            }
+        }
+        foreach ($arLineMatches as $nLine => $arMatches) {
+            foreach ($arMatches[0] as $nId => $strFull) {
+                $chOpen      = $arMatches[1][$nId];
+                $strVariable = $arMatches[2][$nId];
+                $chClose     = $arMatches[3][$nId];
+//var_dump($chOpen, $strVariable, $chClose, '--');
+                if ($chOpen != '{') {
+                    $arErrors[] = array(
+                        'short'   => 'OPENING_BRACE_MISSING',
+                        'message' => 'Variable "' . $strVariable . '" misses opening brace.',
+                        'line'    => $nLine,
+                        'code'    => $strFull
+                    );
+                } else if ($chClose != '}') {
+                    $arErrors[] = array(
+                        'short'   => 'CLOSING_BRACE_MISSING',
+                        'message' => 'Variable "' . $strVariable . '" misses closing brace.',
+                        'line'    => $nLine,
+                        'code'    => $strFull
+                    );
+                }
+            }
+        }
+
+        return $arErrors;
+    }//function checkVariables($strContent)
 
 
 

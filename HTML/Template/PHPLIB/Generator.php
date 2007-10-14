@@ -67,7 +67,7 @@ class HTML_Template_PHPLIB_Generator
                             $arBlock['sub'], $strTplName, $strPrefix
                 );
             }
-            $code .= $strPrefix . "->set_block('" . $strTplName . "','"
+            $code .= $strPrefix . "->setBlock('" . $strTplName . "','"
                     . $arBlock['name'] . "', '"
                     . $arBlock['name'] . "_ref');" . $nl;
         }

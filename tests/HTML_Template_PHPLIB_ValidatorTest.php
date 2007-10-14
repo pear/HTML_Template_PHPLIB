@@ -52,16 +52,23 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(HTML_Template_PHPLIB_Validator::validate());
         $this->assertTrue(HTML_Template_PHPLIB_Validator::validate(null, ''));
 
+        //check blocks from string
         $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '<!-- BEGIN block -->');
         $this->assertType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
 
+        //check blocks from file
         $name = tempnam('/tmp', 'HTML_Template_PHPLIB-test');
         file_put_contents($name, '<!-- BEGIN blo -->');
         $arErrors = HTML_Template_PHPLIB_Validator::validate($name);
         $this->assertType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
         unlink($name);
+
+        //variables are checked, too
+        $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '{PARTIAL');
+        $this->assertType('array', $arErrors);
+        $this->assertEquals(1, count($arErrors));
     }//public function testValidate()
 
 
@@ -70,6 +77,9 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testCheckBlockDefinitions()
     {
+        $arErrors = HTML_Template_PHPLIB_Validator::checkBlockDefinitions(array());
+        $this->assertEquals(array(), $arErrors);
+
         $cont = <<<EOT
 <!-- BEGIN one -->
 <!-- END one -->
@@ -305,6 +315,56 @@ array (
             $arErrors
         );
     }//public function testCheckBlockDefinitionsWrongNesting()
+
+
+
+    /**
+    * Test if wrongly defined variables are detected
+    */
+    public function testCheckVariables()
+    {
+         $arErrors = HTML_Template_PHPLIB_Validator::checkVariables(array());
+         $this->assertEquals(array(), $arErrors);
+
+        $cont = <<<EOT
+{FULL}
+{PARTIAL1
+PARTIAL2}
+<h1>{FULL2}{FULL3}</h2>
+<p><strong>{PARTIAL3</strong>}</p>
+<p>{<strong>PARTIAL3}</strong></p>
+EOT;
+        $arErrors = HTML_Template_PHPLIB_Validator::checkVariables(
+            HTML_Template_PHPLIB_Helper::getLines(null, $cont)
+        );
+        $arErrors = self::stripMessages($arErrors);
+
+        $this->assertEquals(
+array (
+  array (
+    'short' => 'CLOSING_BRACE_MISSING',
+    'line' => 2,
+    'code' => '{PARTIAL1',
+  ),
+  array (
+    'short' => 'OPENING_BRACE_MISSING',
+    'line' => 3,
+    'code' => 'PARTIAL2}',
+  ),
+  array (
+    'short' => 'CLOSING_BRACE_MISSING',
+    'line' => 5,
+    'code' => '{PARTIAL3<',
+  ),
+  array (
+    'short' => 'OPENING_BRACE_MISSING',
+    'line' => 6,
+    'code' => '>PARTIAL3}',
+  ),
+),
+            $arErrors
+        );
+    }//public function testCheckVariables()
 
 
 

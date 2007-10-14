@@ -532,8 +532,8 @@ class HTML_Template_PHPLIB
 
         return $filename;
     }
-    
-    
+
+
     /**
      * Tells you whether a filename is absolute or relative
      *
@@ -639,8 +639,9 @@ class HTML_Template_PHPLIB
     function haltMsg($msg)
     {
         require_once 'PEAR.php';
-        return PEAR::raiseError(sprintf('<b>Template Error:</b> %s<br>'
-             . "\n", $msg));
+        return PEAR::raiseError(
+            '<b>Template Error:</b> ' . $msg . '<br/>'. "\n"
+        );
     }
 
     /**
