@@ -253,7 +253,7 @@ class HTML_Template_PHPLIB_Validator
                 $chOpen      = $arMatches[1][$nId];
                 $strVariable = $arMatches[2][$nId];
                 $chClose     = $arMatches[3][$nId];
-//var_dump($chOpen, $strVariable, $chClose, '--');
+
                 if ($chOpen != '{') {
                     $arErrors[] = array(
                         'short'   => 'OPENING_BRACE_MISSING',
