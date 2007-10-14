@@ -7,7 +7,7 @@ require_once 'PHPUnit/Framework/TestSuite.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
 
-chdir(dirname(__FILE__));
+chdir(dirname(__FILE__) . '/../');
 require_once 'HTML_Template_PHPLIBTest.php';
 require_once 'HTML_Template_PHPLIB_GeneratorTest.php';
 require_once 'HTML_Template_PHPLIB_ValidatorTest.php';
