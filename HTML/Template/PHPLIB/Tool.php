@@ -1,4 +1,16 @@
 <?php
+/**
+ * Additional tools for HTML_Template_PHPLIB
+ *
+ * PHP Versions 4 and 5
+ *
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Christian Weiske <cweiske@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
+ */
 
 /**
 * Command line tool to use the HTML_Template_PHPLIB validator and generator.
@@ -11,6 +23,11 @@
 */
 class HTML_Template_PHPLIB_Tool
 {
+    /**
+    * Constructor
+    *
+    * @param array $args Cmdline arguments
+    */
     function HTML_Template_PHPLIB_Tool($args)
     {
         $strAction = $this->getAction($args);
@@ -22,6 +39,7 @@ class HTML_Template_PHPLIB_Tool
     /**
     * Start the tool
     *
+    * @return void
     * @static
     */
     function run()
@@ -130,7 +148,8 @@ EOT;
                 } else {
                     echo count($arErrors) . ' errors in ' . $file . "\n";
                     foreach ($arErrors as $arError) {
-                        echo ' Line #' . $arError['line'] . ': ' . $arError['message'] . "\n";
+                        echo ' Line #' . $arError['line'] . ': '
+                            . $arError['message'] . "\n";
                     }
                     $nError = 10;
                 }

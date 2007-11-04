@@ -1,15 +1,20 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4:
-// This code that was derived from the original PHPLIB Template class
-// is copyright by Kristian Koehntopp, NetUSE AG and was released
-// under the LGPL.
-//
-// Authors: Kristian Koehntopp <kris@koehntopp.de> (original from PHPLIB)
-//          Bjoern Schotte <schotte@mayflower.de> (PEARification)
-//          Martin Jansen <mj@php.net> (PEAR conformance)
-//
-// $Id$
-//
+/**
+ * This code that was derived from the original PHPLIB Template class
+ * is copyright by Kristian Koehntopp, NetUSE AG and was released
+ * under the LGPL.
+ *
+ * PHP Versions 4 and 5
+ *
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Kristian Koehntopp <kris@koehntopp.de>
+ * @author   Bjoern Schotte <schotte@mayflower.de>
+ * @author   Martin Jansen <mj@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
+ */
 
 /**
  * Converted PHPLIB Template class
@@ -22,9 +27,8 @@
  * @category HTML
  * @package  HTML_Template_PHPLIB
  * @author   Bjoern Schotte <schotte@mayflower.de>
- * @author   Martin Jansen <mj@php.net> (PEAR conformance)
+ * @author   Martin Jansen <mj@php.net>
  * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
- * @version  CVS: $Id$
  * @link     http://pear.php.net/package/HTML_Template_PHPLIB
  */
 class HTML_Template_PHPLIB
@@ -666,7 +670,6 @@ class HTML_Template_PHPLIB
  * @package  HTML_Template_PHPLIB
  * @author   Christian Weiske <cweiske@php.net>
  * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
- * @version  CVS: $Id$
  * @link     http://pear.php.net/package/HTML_Template_PHPLIB
  */
 class Template_PHPLIB extends HTML_Template_PHPLIB

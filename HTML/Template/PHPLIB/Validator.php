@@ -1,4 +1,16 @@
 <?php
+/**
+ * Additional tools for HTML_Template_PHPLIB
+ *
+ * PHP Versions 4 and 5
+ *
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Christian Weiske <cweiske@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
+ */
 require_once 'HTML/Template/PHPLIB/Helper.php';
 
 /**
@@ -229,9 +241,9 @@ class HTML_Template_PHPLIB_Validator
     */
     function checkVariables($arLines)
     {
-        $arErrors   = array();
-        $strAllowed = 'a-zA-Z0-9_-';
-        $strRegex   = '/'
+        $arErrors      = array();
+        $strAllowed    = 'a-zA-Z0-9_-';
+        $strRegex      = '/'
             . '(?:'
                 . '(\{)'
                 . '(['  . $strAllowed . ']+)'

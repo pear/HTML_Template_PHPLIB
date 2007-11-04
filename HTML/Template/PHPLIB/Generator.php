@@ -1,4 +1,16 @@
 <?php
+/**
+ * Additional tools for HTML_Template_PHPLIB
+ *
+ * PHP Versions 4 and 5
+ *
+ * @category HTML
+ * @package  HTML_Template_PHPLIB
+ * @author   Christian Weiske <cweiske@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/HTML_Template_PHPLIB
+ */
 require_once 'HTML/Template/PHPLIB/Helper.php';
 
 /**
@@ -22,29 +34,36 @@ class HTML_Template_PHPLIB_Generator
     *
     * @return string PHP code
     */
-    function getCodeBlockDefinition($strFile, $strTplName = null, $strPrefix = '$tpl')
+    function getCodeBlockDefinition($strFile, $strTplName = null,
+        $strPrefix = '$tpl')
     {
         $arBlocks = HTML_Template_PHPLIB_Generator::getBlocks(
             HTML_Template_PHPLIB_Helper::getLines($strFile)
         );
 
         if ($strTplName === null) {
-            $strTplName = HTML_Template_PHPLIB_Generator::getTemplateNameFromFilename($strFile);
+            $strTplName
+                = HTML_Template_PHPLIB_Generator::getTemplateNameFromFilename(
+                    $strFile
+                );
         }
 
         $nl    = "\r\n";
         $code  = '';
         $code .= $strPrefix . ' = new HTML_Template_PHPLIB();' . $nl;
-        $code .= HTML_Template_PHPLIB_Generator::getCodeBlock($arBlocks, $strTplName, $strPrefix);
+        $code .= HTML_Template_PHPLIB_Generator::getCodeBlock(
+            $arBlocks, $strTplName, $strPrefix
+        );
         $code .= $nl;
         $code .= '//TODO: do something with the code' . $nl;
         $code .= $nl;
 
         $code .= $strPrefix . '->finish('
-                . trim($strPrefix) . "->parse('TMP', '" . $strTplName . "'));" . $nl;
+            . trim($strPrefix) . "->parse('TMP', '" . $strTplName . "'));"
+            . $nl;
 
         return $code;
-    }//function getCodeBlockDefinition($strFile, $strTplName = null, $strPrefix = '$tpl')
+    }//function getCodeBlockDefinition($strFile, $strTplName = null, ..)
 
 
 
@@ -106,12 +125,14 @@ class HTML_Template_PHPLIB_Generator
                 );
                 if (count($arRefs) == 0) {
                     $arBlocks[$arBlock['name']] = $arBlock;
-                    $arRefs[$strBlockName] = &$arBlocks[$arBlock['name']];
+                    $arRefs[$strBlockName]      = &$arBlocks[$arBlock['name']];
                 } else {
                     end($arRefs);
                     $strOldBlock = key($arRefs);
+
                     $arRefs[$strOldBlock]['sub'][$strBlockName] = $arBlock;
-                    $arRefs[$strBlockName] =& $arRefs[$strOldBlock]['sub'][$strBlockName];
+                    $arRefs[$strBlockName]
+                        =& $arRefs[$strOldBlock]['sub'][$strBlockName];
                 }
             } else {
                 unset($arRefs[$strBlockName]);
