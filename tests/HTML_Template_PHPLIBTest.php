@@ -234,9 +234,76 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase {
             $this->tpl->get('TMP')
         );
     }
-    
-    
-    
+
+
+
+    public function testExists()
+    {
+        $this->assertFalse($this->tpl->exists('one'));
+        $this->assertFalse($this->tpl->exists('two'));
+        $this->assertFalse($this->tpl->exists(array('three', 'four')));
+
+        $this->tpl->setVar('one', '1');
+        $this->tpl->setVar('three', '3');
+        $this->assertTrue($this->tpl->exists('one'));
+        $this->assertFalse($this->tpl->exists('two'));
+        $this->assertTrue($this->tpl->exists('three'));
+    }
+
+
+
+    public function testExistsArray()
+    {
+        $this->assertFalse($this->tpl->exists(array('three', 'four')));
+
+        $this->tpl->setVar('one', '1');
+        $this->tpl->setVar('three', '3');
+
+        $this->assertTrue($this->tpl->exists(array('one')));
+        $this->assertTrue($this->tpl->exists(array('one', 'three')));
+
+        $this->assertFalse($this->tpl->exists(array('two')));
+        $this->assertFalse($this->tpl->exists(array('one', 'two')));
+        $this->assertFalse($this->tpl->exists(array('two', 'three')));
+        $this->assertFalse($this->tpl->exists(array('one', 'two', 'three')));
+    }
+
+
+
+    public function testUnsetVar()
+    {
+        $this->tpl->setVar('one', '1');
+        $this->tpl->setVar('two', '2');
+        $this->tpl->setVar('three', '3');
+
+        $this->tpl->unsetVar('two');
+        $this->assertFalse($this->tpl->exists('two'));
+        $this->assertEquals('1', $this->tpl->getVar('one'));
+        $this->assertEquals('',  $this->tpl->getVar('two'));
+        $this->assertEquals('3', $this->tpl->getVar('three'));
+    }
+
+
+
+    public function testUnsetVarArray()
+    {
+        $this->tpl->setVar('one', '1');
+        $this->tpl->setVar('two', '2');
+        $this->tpl->setVar('three', '3');
+        $this->tpl->setVar('four', '4');
+
+        $this->tpl->unsetVar(array('two', 'four'));
+
+        $this->assertFalse($this->tpl->exists('two'));
+        $this->assertFalse($this->tpl->exists('four'));
+        $this->assertEquals('1', $this->tpl->getVar('one'));
+        $this->assertEquals('',  $this->tpl->getVar('two'));
+        $this->assertEquals('3', $this->tpl->getVar('three'));
+        $this->assertEquals('',  $this->tpl->getVar('four'));
+    }
+
+
+
     public function testIsAbsolute()
     {
         $this->assertTrue($this->tpl->_isAbsolute('/home/user/project/template.tpl'));

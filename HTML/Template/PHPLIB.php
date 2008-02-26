@@ -110,6 +110,68 @@ class HTML_Template_PHPLIB
     }
 
     /**
+     * Clears a variable (sets its content to "")
+     *
+     * @param array|string $var Variable name to clear, or array name
+     *
+     * @return void
+     *
+     * @access public
+     */
+    function clearVar($var)
+    {
+        if (is_array($var)) {
+            foreach ($var as $varname) {
+                $this->setVar($varname, '');
+            }
+        } else {
+            $this->setVar($var, '');
+        }
+    }
+
+    /**
+     * Unsets a variable completly
+     *
+     * @param array|string $var Variable name to clear, or array of names
+     *
+     * @return void
+     *
+     * @access public
+     */
+    function unsetVar($var)
+    {
+        if (is_array($var)) {
+            foreach ($var as $varname) {
+                unset($this->_varKeys[$varname]);
+                unset($this->_varVals[$varname]);
+            }
+        } else {
+            unset($this->_varKeys[$var]);
+            unset($this->_varVals[$var]);
+        }
+    }
+
+    /**
+     * Checks if the given variable exists.
+     * When an array is given, it is checked if all
+     * variables exist.
+     *
+     * @param string|array $var Variable to check
+     */
+    function exists($var)
+    {
+        if (is_array($var)) {
+            $isset = true;
+            foreach ($var as $varname) {
+                $isset = $isset & isset($this->_varVals[$varname]);
+            }
+            return $isset > 0;
+        } else {
+            return isset($this->_varVals[$var]);
+        }
+    }
+
+    /**
      * Sets the template directory
      *
      * @param string $root New template directory
