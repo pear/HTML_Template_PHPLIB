@@ -22,17 +22,19 @@ well as some speed improvements.</description>
  <date>2007-10-14</date>
  <time>10:15:00</time>
  <version>
-  <release>1.4.0a3</release>
-  <api>1.3.3</api>
+  <release>1.4.1</release>
+  <api>1.4.1</api>
  </version>
  <stability>
-  <release>alpha</release>
+  <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  - Fix bug #12229: broken blocks not detected [cweiske]
-  - Validate variables
+<!-- this is for the next release -->
+  - Fix bug #12243: PEAR_Errors not returned from halt()
+  - Add new "return" haltOnError level
+  - Respect haltOnError settings
  </notes>
  <contents>
   <dir name="/">

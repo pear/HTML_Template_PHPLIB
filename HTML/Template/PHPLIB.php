@@ -78,9 +78,10 @@ class HTML_Template_PHPLIB
     var $unknowns = 'remove';
 
     /**
-     * 'yes' => halt,
+     * 'yes'    => halt,
      * 'report' => report error, continue,
-     * 'no' => ignore error quietly
+     * 'return' => return PEAR_Error object,
+     * 'no'     => ignore error quietly
      * @var string
      */
     var $haltOnError  = 'report';
@@ -182,8 +183,7 @@ class HTML_Template_PHPLIB
     function setRoot($root)
     {
         if (!is_dir($root)) {
-            $this->halt('setRoot: ' . $root . ' is not a directory.');
-            return false;
+            return $this->halt('setRoot: ' . $root . ' is not a directory.');
         }
 
         $this->root = $root;
@@ -233,9 +233,10 @@ class HTML_Template_PHPLIB
         if (!is_array($handle)) {
 
             if ($filename == '') {
-                $this->halt('setFile: For handle '
-                            . $handle . ' filename is empty.');
-                return false;
+                return $this->halt(
+                    'setFile: For handle '
+                    . $handle . ' filename is empty.'
+                );
             }
 
             $this->file[$handle] = $this->_filename($filename);
@@ -282,8 +283,9 @@ class HTML_Template_PHPLIB
     function setBlock($parent, $handle, $name = '')
     {
         if (!$this->_loadFile($parent)) {
-            $this->halt('setBlock: unable to load ' . $parent . '.');
-            return false;
+            return $this->halt(
+                'setBlock: unable to load ' . $parent . '.'
+            );
         }
 
         if ($name == '') {
@@ -356,8 +358,7 @@ class HTML_Template_PHPLIB
     function subst($handle)
     {
         if (!$this->_loadFile($handle)) {
-            $this->halt('subst: unable to load ' . $handle . '.');
-            return false;
+            return $this->halt('subst: unable to load ' . $handle . '.');
         }
 
         return @str_replace($this->_varKeys,
@@ -487,8 +488,7 @@ class HTML_Template_PHPLIB
     function getUndefined($handle)
     {
         if (!$this->_loadFile($handle)) {
-            $this->halt('getUndefined: unable to load ' . $handle);
-            return false;
+            return $this->halt('getUndefined: unable to load ' . $handle);
         }
 
         preg_match_all("/{([^ \t\r\n}]+)}/", $this->getVar($handle), $m);
@@ -577,7 +577,10 @@ class HTML_Template_PHPLIB
             $filename = $this->root . '/' . $filename;
         }
 
-        if (file_exists($filename)) return $filename;
+        if (file_exists($filename)) {
+            return $filename;
+        }
+
         if (is_array($this->file_fallbacks) && count($this->file_fallbacks) > 0) {
             reset($this->file_fallbacks);
             while (list(,$v) = each($this->file_fallbacks)) {
@@ -585,18 +588,16 @@ class HTML_Template_PHPLIB
                     return $v.basename($filename);
                 }
             }
-            $this->halt(sprintf(
+            return $this->halt(sprintf(
                 'filename: file %s does not exist in the fallback paths %s.',
                 $filename,
                 implode(',', $this->file_fallbacks)
             ));
-            return false;
         } else {
-            $this->halt(sprintf('filename: file %s does not exist.', $filename));
-            return false;
+            return $this->halt(
+                sprintf('filename: file %s does not exist.', $filename)
+            );
         }
-
-        return $filename;
     }
 
 
@@ -647,8 +648,7 @@ class HTML_Template_PHPLIB
         }
 
         if (!isset($this->file[$handle])) {
-            $this->halt('loadfile: ' . $handle . ' is not a valid handle.');
-            return false;
+            return $this->halt('loadfile: ' . $handle . ' is not a valid handle.');
         }
 
         $filename = $this->file[$handle];
@@ -656,8 +656,7 @@ class HTML_Template_PHPLIB
             $str = file_get_contents($filename);
         } else {
             if (!$fp = @fopen($filename, 'r')) {
-                $this->halt('loadfile: couldn\'t open ' . $filename);
-                return false;
+                return $this->halt('loadfile: couldn\'t open ' . $filename);
             }
 
             $str = fread($fp, filesize($filename));
@@ -665,9 +664,10 @@ class HTML_Template_PHPLIB
         }
 
         if ($str == '') {
-            $this->halt('loadfile: While loading ' . $handle . ', '
-                . $filename . ' does not exist or is empty.');
-            return false;
+            return $this->halt(
+                'loadfile: While loading ' . $handle . ', '
+                . $filename . ' does not exist or is empty.'
+            );
         }
 
         $this->setVar($handle, $str);
@@ -687,11 +687,27 @@ class HTML_Template_PHPLIB
     {
         $this->_lastError = $msg;
 
-        if ($this->haltOnError != 'no') {
-            return $this->haltMsg($msg);
-        }
+        switch ($this->haltOnError) {
+            case 'yes':
+                return $this->haltMsg(
+                    $msg, PEAR_ERROR_TRIGGER, E_USER_ERROR
+                );
 
-        return false;
+            case 'report':
+                $this->haltMsg(
+                    $msg, PEAR_ERROR_PRINT
+                );
+                return false;
+
+            case 'return':
+                return $this->haltMsg(
+                    $msg, PEAR_ERROR_RETURN
+                );
+
+            case 'no':
+            default:
+                return false;
+        }
     }
 
     /**
@@ -702,11 +718,13 @@ class HTML_Template_PHPLIB
      * @return object PEAR error object
      * @access public
      */
-    function haltMsg($msg)
+    function haltMsg($msg, $mode = null, $level = null)
     {
         require_once 'PEAR.php';
         return PEAR::raiseError(
-            '<b>Template Error:</b> ' . $msg . '<br/>'. "\n"
+            '<b>Template Error:</b> ' . $msg . '<br/>'. "\n",
+            null,
+            $mode, $level
         );
     }
 

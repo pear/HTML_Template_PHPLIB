@@ -24,7 +24,7 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase {
         require_once 'PHPUnit/TextUI/TestRunner.php';
 
         $suite  = new PHPUnit_Framework_TestSuite('HTML_Template_PHPLIBTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -36,6 +36,7 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         chdir(dirname(__FILE__) . '/');
         $this->tpl = new HTML_Template_PHPLIB('templates');
+        $this->tpl->haltOnError = 'no';
         $this->assertFalse($this->tpl->getLastError());
     }
 
