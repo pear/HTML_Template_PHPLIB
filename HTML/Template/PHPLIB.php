@@ -79,9 +79,9 @@ class HTML_Template_PHPLIB
 
     /**
      * 'yes'    => halt,
-     * 'report' => report error, continue,
+     * 'report' => report error, continue, return false
      * 'return' => return PEAR_Error object,
-     * 'no'     => ignore error quietly
+     * 'no'     => ignore error quietly, return false from functions
      * @var string
      */
     var $haltOnError  = 'report';
@@ -226,6 +226,7 @@ class HTML_Template_PHPLIB
      * @param string $filename Name of template file
      *
      * @return bool True if file could be loaded
+     *
      * @access public
      */
     function setFile($handle, $filename = '')
@@ -239,21 +240,27 @@ class HTML_Template_PHPLIB
                 );
             }
 
-            $this->file[$handle] = $this->_filename($filename);
-            if ($this->file[$handle] === false) {
-                return false;
+            $file = $this->_filename($filename);
+            if ($this->isError($file)) {
+                $this->file[$handle] = false;
+                return $file;
             }
+            $this->file[$handle] = $file;
             return true;
         } else {
             reset($handle);
-            $error = false;
+            $allok = true;
             while (list($h, $f) = each($handle)) {
-                $this->file[$h] = $this->_filename($f);
-                if ($this->file[$h] === false) {
-                    $error = true;
+                $file = $this->_filename($f);
+                if ($this->isError($file)) {
+                    $this->file[$h] = false;
+                    $allok = $file;
+                } else {
+                    $this->file[$h] = $file;
                 }
             }
-            return $error === false;
+
+            return $allok;
         }
     }
 
@@ -277,12 +284,12 @@ class HTML_Template_PHPLIB
      * @param string $handle Block name handle
      * @param string $name   Variable substitution name
      *
-     * @return void
+     * @return mixed True if all went well
      * @access public
      */
     function setBlock($parent, $handle, $name = '')
     {
-        if (!$this->_loadFile($parent)) {
+        if ($this->isError($this->_loadFile($parent))) {
             return $this->halt(
                 'setBlock: unable to load ' . $parent . '.'
             );
@@ -293,13 +300,18 @@ class HTML_Template_PHPLIB
         }
 
         $str = $this->getVar($parent);
-        $reg = "/[ \t]*<!--\s+BEGIN $handle\s+-->\s*?\n?(\s*.*?\n?)"
-             . "\s*<!--\s+END $handle\s+-->\s*?\n?/sm";
+        $reg = "/[ \t]*<!--\\s+BEGIN $handle\\s+-->\\s*?\n?(\\s*.*?\n?)"
+             . "\\s*<!--\\s+END $handle\\s+-->\\s*?\n?/sm";
+        $m   = array();
         preg_match_all($reg, $str, $m);
         $str = preg_replace($reg, '{' . $name . '}', $str);
 
-        if (isset($m[1][0])) $this->setVar($handle, $m[1][0]);
+        if (isset($m[1][0])) {
+            $this->setVar($handle, $m[1][0]);
+        }
         $this->setVar($parent, $str);
+
+        return true;
     }
 
     /**
@@ -357,7 +369,7 @@ class HTML_Template_PHPLIB
      */
     function subst($handle)
     {
-        if (!$this->_loadFile($handle)) {
+        if ($this->isError($this->_loadFile($handle))) {
             return $this->halt('subst: unable to load ' . $handle . '.');
         }
 
@@ -731,7 +743,7 @@ class HTML_Template_PHPLIB
     /**
      * Returns the last error message if any
      *
-     * @return boolean|string Last error message if any
+     * @return boolean|string Last error message if any, false if none.
      */
     function getLastError()
     {
@@ -740,6 +752,25 @@ class HTML_Template_PHPLIB
         }
         return $this->_lastError;
     }
+
+
+
+    /**
+     * Checks if the given value is an error
+     *
+     * @param mixed $val Some value
+     */
+    function isError($val)
+    {
+        if ($val === false) {
+            return true;
+        } else if ($this->haltOnError == 'return' && is_object($val)) {
+            require_once 'PEAR.php';
+            return PEAR::isError($val);
+        }
+        return false;
+    }//function isError($val)
+
 }
 
 /**
