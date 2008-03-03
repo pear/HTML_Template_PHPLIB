@@ -112,7 +112,8 @@ class HTML_Template_PHPLIB_Generator
         $arBlocks = array();
         $arRefs   = array();
         $strRegex = '/<!--\s+(BEGIN|END)\s+([a-zA-Z0-9_]*)\s+-->/';
-        foreach ($arLines as $nLine => $strLine) {
+        foreach ($arLines as $strLine) {
+            $arMatches = array();
             if (!preg_match($strRegex, $strLine, $arMatches)) {
                 continue;
             }

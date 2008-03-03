@@ -175,6 +175,27 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('templates/simple2.tpl', $this->tpl->file['testfile2']);
     }
 
+
+
+    /**
+     * This should show a bug, but it does not (#12198)
+     */
+    public function testSetFileMultipleTimes()
+    {
+        $this->assertTrue(
+            $this->tpl->setFile('testfile', 'block.tpl')
+        );
+        $this->assertTrue(
+            $this->tpl->setFile('testfile2', 'block.tpl')
+        );
+        $this->assertTrue(
+            $this->tpl->setBlock('testfile', 'hello_world', 'hello_world_ref')
+        );
+        $this->tpl->parse('hello_world_ref', 'hello_world');
+    }//public function testSetFileMultipleTimes()
+
+
+
     /**
      *
      */
