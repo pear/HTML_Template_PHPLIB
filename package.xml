@@ -43,7 +43,7 @@ well as some speed improvements.</description>
   - Fix bug #12243: PEAR_Errors not returned from halt()
   - Add new "return" haltOnError level
   - Respect haltOnError settings
-  - Add setIllegals() method for variable names
+  - Implement request #15993: Add setIllegals() method for variable names
  </notes>
  <contents>
   <dir name="/">
@@ -312,7 +312,7 @@ well as some speed improvements.</description>
   - Fix bug #12243: PEAR_Errors not returned from halt()
   - Add new "return" haltOnError level
   - Respect haltOnError settings
-  - Add setIllegals() method for variable names
+  - Implement request #15993: Add setIllegals() method for variable names
    </notes>
   </release>
 
