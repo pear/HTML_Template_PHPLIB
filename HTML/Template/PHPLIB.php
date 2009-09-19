@@ -73,9 +73,20 @@ class HTML_Template_PHPLIB
      * 'remove'  => remove undefined variables
      * 'comment' => replace undefined variables with comments
      * 'keep'    => keep undefined variables
+     *
      * @var string
      */
     var $unknowns = 'remove';
+
+    /**
+     * Characters that are not allowed in variable names.
+     * Need to be preg_quote'd.
+     *
+     * @var string
+     *
+     * @see setIllegals()
+     */
+    var $illegals = '';
 
     /**
      * 'yes'    => halt,
@@ -103,11 +114,14 @@ class HTML_Template_PHPLIB
      *
      * @access public
      */
-    function HTML_Template_PHPLIB($root = '.', $unknowns = 'remove', $fallback='')
-    {
+    function HTML_Template_PHPLIB(
+        $root = '.', $unknowns = 'remove', $fallback=''
+    ) {
         $this->setRoot($root);
         $this->setUnknowns($unknowns);
-        if (is_array($fallback)) $this->file_fallbacks = $fallback;
+        if (is_array($fallback)) {
+            $this->file_fallbacks = $fallback;
+        }
     }
 
     /**
@@ -158,6 +172,8 @@ class HTML_Template_PHPLIB
      * variables exist.
      *
      * @param string|array $var Variable to check
+     *
+     * @return boolean True if the variable exists
      */
     function exists($var)
     {
@@ -209,6 +225,24 @@ class HTML_Template_PHPLIB
     function setUnknowns($unknowns = 'keep')
     {
         $this->unknowns = $unknowns;
+    }
+
+    /**
+     * Set characters that are not allowed in variable names.
+     * Normal illegal characters like space, tab, newline
+     * are automatically there and do not have to be mentioned here.
+     *
+     * @param string $illegals String of characters not allowed in
+     *                         template variable names.
+     *
+     * @return void
+     * @access public
+     *
+     * @see $illegals
+     */
+    function setIllegals($illegals)
+    {
+        $this->illegals = preg_quote($illegals, '/');
     }
 
     /**
@@ -373,8 +407,9 @@ class HTML_Template_PHPLIB
             return $this->halt('subst: unable to load ' . $handle . '.');
         }
 
-        return @str_replace($this->_varKeys,
-                            $this->_varVals, $this->getVar($handle));
+        return @str_replace(
+            $this->_varKeys, $this->_varVals, $this->getVar($handle)
+        );
     }
 
     /**
@@ -503,7 +538,10 @@ class HTML_Template_PHPLIB
             return $this->halt('getUndefined: unable to load ' . $handle);
         }
 
-        preg_match_all("/{([^ \t\r\n}]+)}/", $this->getVar($handle), $m);
+        preg_match_all(
+            '/{([^ \t\r\n}' . $this->illegals . ']+)}/',
+            $this->getVar($handle), $m
+        );
         $m = $m[1];
         if (!is_array($m)) {
             return false;
@@ -535,12 +573,17 @@ class HTML_Template_PHPLIB
     {
         switch ($this->unknowns) {
         case 'remove':
-            $str = preg_replace('/{[^ \t\r\n}]+}/', '', $str);
+            $str = preg_replace(
+                '/{[^ \t\r\n}' . $this->illegals . ']+}/',
+                '', $str
+            );
             break;
 
         case 'comment':
-            $str = preg_replace('/{([^ \t\r\n}]+)}/',
-                '<!-- Template variable \\1 undefined -->', $str);
+            $str = preg_replace(
+                '/{([^ \t\r\n}' . $this->illegals . ']+)}/',
+                '<!-- Template variable \\1 undefined -->', $str
+            );
             break;
         }
 
@@ -593,18 +636,22 @@ class HTML_Template_PHPLIB
             return $filename;
         }
 
-        if (is_array($this->file_fallbacks) && count($this->file_fallbacks) > 0) {
+        if (is_array($this->file_fallbacks)
+            && count($this->file_fallbacks) > 0
+        ) {
             reset($this->file_fallbacks);
             while (list(,$v) = each($this->file_fallbacks)) {
                 if (file_exists($v.basename($filename))) {
                     return $v.basename($filename);
                 }
             }
-            return $this->halt(sprintf(
-                'filename: file %s does not exist in the fallback paths %s.',
-                $filename,
-                implode(',', $this->file_fallbacks)
-            ));
+            return $this->halt(
+                sprintf(
+                    'filename: file %s does not exist in the fallback paths %s.',
+                    $filename,
+                    implode(',', $this->file_fallbacks)
+                )
+            );
         } else {
             return $this->halt(
                 sprintf('filename: file %s does not exist.', $filename)
@@ -700,41 +747,44 @@ class HTML_Template_PHPLIB
         $this->_lastError = $msg;
 
         switch ($this->haltOnError) {
-            case 'yes':
-                return $this->haltMsg(
-                    $msg, PEAR_ERROR_TRIGGER, E_USER_ERROR
-                );
+        case 'yes':
+            return $this->haltMsg(
+                $msg, PEAR_ERROR_TRIGGER, E_USER_ERROR
+            );
 
-            case 'report':
-                $this->haltMsg(
-                    $msg, PEAR_ERROR_PRINT
-                );
-                return false;
+        case 'report':
+            $this->haltMsg(
+                $msg, PEAR_ERROR_PRINT
+            );
+            return false;
 
-            case 'return':
-                return $this->haltMsg(
-                    $msg, PEAR_ERROR_RETURN
-                );
+        case 'return':
+            return $this->haltMsg(
+                $msg, PEAR_ERROR_RETURN
+            );
 
-            case 'no':
-            default:
-                return false;
+        case 'no':
+        default:
+            return false;
         }
     }
 
     /**
      * printf error message to show
      *
-     * @param string $msg message to show
+     * @param string $msg   Message to show
+     * @param string $mode  PEAR error mode, i.e. PEAR_ERROR_RETURN
+     * @param string $level Internal error level when $mode
+     *                      is PEAR_ERROR_TRIGGER
      *
      * @return object PEAR error object
      * @access public
      */
     function haltMsg($msg, $mode = null, $level = null)
     {
-        require_once 'PEAR.php';
+        include_once 'PEAR.php';
         return PEAR::raiseError(
-            '<b>Template Error:</b> ' . $msg . '<br/>'. "\n",
+            '<b>Template Error:</b> ' . $msg . '<br/>' . "\n",
             null,
             $mode, $level
         );
@@ -759,13 +809,15 @@ class HTML_Template_PHPLIB
      * Checks if the given value is an error
      *
      * @param mixed $val Some value
+     *
+     * @return boolean True if it is an error
      */
     function isError($val)
     {
         if ($val === false) {
             return true;
         } else if ($this->haltOnError == 'return' && is_object($val)) {
-            require_once 'PEAR.php';
+            include_once 'PEAR.php';
             return PEAR::isError($val);
         }
         return false;
