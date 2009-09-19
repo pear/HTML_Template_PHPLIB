@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package
+ version="2.0"
+ xmlns="http://pear.php.net/dtd/package-2.0"
+ xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+  http://pear.php.net/dtd/tasks-1.0.xsd
+  http://pear.php.net/dtd/package-2.0
+  http://pear.php.net/dtd/package-2.0.xsd"
+>
  <name>HTML_Template_PHPLIB</name>
  <channel>pear.php.net</channel>
  <summary>preg_* based template system.</summary>
@@ -19,11 +28,11 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2007-10-14</date>
- <time>10:15:00</time>
+ <date>2009-09-19</date>
+ <time>07:55:00</time>
  <version>
-  <release>1.4.1</release>
-  <api>1.4.1</api>
+  <release>1.5.0</release>
+  <api>1.5.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -31,10 +40,10 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-<!-- this is for the next release -->
   - Fix bug #12243: PEAR_Errors not returned from halt()
   - Add new "return" haltOnError level
   - Respect haltOnError settings
+  - Add setIllegals() method for variable names
  </notes>
  <contents>
   <dir name="/">
@@ -267,5 +276,45 @@ well as some speed improvements.</description>
   - Validate variables
    </notes>
   </release>
+
+  <release>
+   <version>
+    <release>1.4.0</release>
+    <api>1.3.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-09-12</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+- Fix bug #12243: PEAR_Errors not returned from halt()
+- Add new "return" haltOnError level
+- Respect haltOnError settings
+- Command line tool to validate template files
+- Command line tool to generate php code from template files
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.5.0</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-09-19</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+  - Fix bug #12243: PEAR_Errors not returned from halt()
+  - Add new "return" haltOnError level
+  - Respect haltOnError settings
+  - Add setIllegals() method for variable names
+   </notes>
+  </release>
+
  </changelog>
 </package>
