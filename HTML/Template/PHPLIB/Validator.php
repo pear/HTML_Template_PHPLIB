@@ -89,12 +89,14 @@ class HTML_Template_PHPLIB_Validator
 
                 $strType      = $arMatches[2];
                 $strBlockName = $arMatches[4];
-                $strArName    = $strType == 'BEGIN' ? 'arBlockOpen' : 'arBlockClose';
+                $strArName    = $strType == 'BEGIN'
+                    ? 'arBlockOpen' : 'arBlockClose';
                 if ($arMatches[1] == '') {
                     //space missing between <!-- and BEGIN|END
                     $arErrors[] = array(
                         'short'   => 'MISSING_SPACE',
-                        'message' => 'Space missing between HTML comment opening marker and ' . $strType,
+                        'message' => 'Space missing between HTML comment'
+                            . ' opening marker and ' . $strType,
                         'line'    => $nLine,
                         'code'    => $strLine
                     );
@@ -103,7 +105,8 @@ class HTML_Template_PHPLIB_Validator
                     //space missing between BEGIN and block name
                     $arErrors[] = array(
                         'short'   => 'MISSING_SPACE',
-                        'message' => 'Space missing between ' . $strType . ' and block name',
+                        'message' => 'Space missing between ' . $strType
+                            . ' and block name',
                         'line'    => $nLine,
                         'code'    => $strLine
                     );
@@ -129,7 +132,8 @@ class HTML_Template_PHPLIB_Validator
                     //space missing between block name and -->
                     $arErrors[] = array(
                         'short'   => 'MISSING_SPACE',
-                        'message' => 'Space missing between block name and HTML comment end marker',
+                        'message' => 'Space missing between block name and'
+                            . ' HTML comment end marker',
                         'line'    => $nLine,
                         'code'    => $strLine
                     );
@@ -146,7 +150,8 @@ class HTML_Template_PHPLIB_Validator
                 $arErrors[] = array(
                     'short'   => 'DUPLICATE_BLOCK',
                     'message' => 'Block "' . $strBlockName . '" is opened'
-                               . ' several times on lines ' . implode(', ', $arLines),
+                        . ' several times on lines '
+                        . implode(', ', $arLines),
                     'line'    => $arLines[0],
                     'code'    => $strBlockName
                 );
@@ -165,7 +170,8 @@ class HTML_Template_PHPLIB_Validator
                 $arErrors[] = array(
                     'short'   => 'DUPLICATE_BLOCK',
                     'message' => 'Block "' . $strBlockName . '" is closed'
-                               . ' several times on lines ' . implode(', ', $arLines),
+                        . ' several times on lines '
+                        . implode(', ', $arLines),
                     'line'    => $arLines[0],
                     'code'    => $strBlockName
                 );
@@ -173,7 +179,8 @@ class HTML_Template_PHPLIB_Validator
             if (!isset($arBlockOpen[$strBlockName])) {
                 $arErrors[] = array(
                     'short'   => 'UNFINISHED_BLOCK',
-                    'message' => 'Block "' . $strBlockName . '" is closed but not opened.',
+                    'message' => 'Block "' . $strBlockName . '" is closed'
+                        . ' but not opened.',
                     'line'    => $arLines[0],
                     'code'    => $strBlockName
                 );
@@ -186,10 +193,12 @@ class HTML_Template_PHPLIB_Validator
         */
         foreach ($arBlockOpen as $strBlockName => $arLines) {
             if (isset($arBlockClose[$strBlockName])
-             && $arLines[0] > $arBlockClose[$strBlockName][0]) {
+                && $arLines[0] > $arBlockClose[$strBlockName][0]
+            ) {
                 $arErrors[] = array(
                     'short'   => 'WRONG_ORDER',
-                    'message' => 'BEGIN of block "' . $strBlockName . '" defined after END.',
+                    'message' => 'BEGIN of block "' . $strBlockName . '"'
+                        . ' defined after END.',
                     'line'    => $arLines[0],
                     'code'    => $strBlockName
                 );
@@ -217,8 +226,10 @@ class HTML_Template_PHPLIB_Validator
                     } else {
                         $arErrors[] = array(
                             'short'   => 'WRONG_NESTING',
-                            'message' => 'Block "' . $arBlock['name'] . '" closed,'
-                                       . ' but  "' . $strStackName . '" is still open.',
+                            'message' => 'Block "' . $arBlock['name']
+                                . '" closed,'
+                                . ' but  "' . $strStackName
+                                . '" is still open.',
                             'line'    => $arBlock['line'],
                             'code'    => $arBlock['code']
                         );
@@ -269,14 +280,16 @@ class HTML_Template_PHPLIB_Validator
                 if ($chOpen != '{') {
                     $arErrors[] = array(
                         'short'   => 'OPENING_BRACE_MISSING',
-                        'message' => 'Variable "' . $strVariable . '" misses opening brace.',
+                        'message' => 'Variable "' . $strVariable
+                            . '" misses opening brace.',
                         'line'    => $nLine,
                         'code'    => $strFull
                     );
                 } else if ($chClose != '}') {
                     $arErrors[] = array(
                         'short'   => 'CLOSING_BRACE_MISSING',
-                        'message' => 'Variable "' . $strVariable . '" misses closing brace.',
+                        'message' => 'Variable "' . $strVariable
+                            . '" misses closing brace.',
                         'line'    => $nLine,
                         'code'    => $strFull
                     );

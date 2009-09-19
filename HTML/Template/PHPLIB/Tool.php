@@ -134,7 +134,7 @@ EOT;
             $this->dieHard("No template files to validate\n", 1);
         }
 
-        require_once 'HTML/Template/PHPLIB/Validator.php';
+        include_once 'HTML/Template/PHPLIB/Validator.php';
         $nError = 0;
         foreach ($args as $file) {
             if (file_exists($file)) {
@@ -177,7 +177,7 @@ EOT;
         }
 
         $strFile = $args[0];
-        require_once 'HTML/Template/PHPLIB/Generator.php';
+        include_once 'HTML/Template/PHPLIB/Generator.php';
         $strCode = HTML_Template_PHPLIB_Generator::getCodeBlockDefinition(
             $strFile
         );

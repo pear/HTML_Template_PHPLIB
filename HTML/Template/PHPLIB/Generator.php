@@ -34,9 +34,9 @@ class HTML_Template_PHPLIB_Generator
     *
     * @return string PHP code
     */
-    function getCodeBlockDefinition($strFile, $strTplName = null,
-        $strPrefix = '$tpl')
-    {
+    function getCodeBlockDefinition(
+        $strFile, $strTplName = null, $strPrefix = '$tpl'
+    ) {
         $arBlocks = HTML_Template_PHPLIB_Generator::getBlocks(
             HTML_Template_PHPLIB_Helper::getLines($strFile)
         );
@@ -83,7 +83,7 @@ class HTML_Template_PHPLIB_Generator
         foreach ($arBlocks as $arBlock) {
             if (count($arBlock['sub']) > 0) {
                 $code .= HTML_Template_PHPLIB_Generator::getCodeBlock(
-                            $arBlock['sub'], $strTplName, $strPrefix
+                    $arBlock['sub'], $strTplName, $strPrefix
                 );
             }
             $code .= $strPrefix . "->setBlock('" . $strTplName . "','"
