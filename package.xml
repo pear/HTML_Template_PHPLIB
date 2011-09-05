@@ -28,10 +28,10 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2009-09-19</date>
- <time>07:55:00</time>
+ <date>2011-09-05</date>
+ <time>07:40:00</time>
  <version>
-  <release>1.5.0</release>
+  <release>1.5.1</release>
   <api>1.5.0</api>
  </version>
  <stability>
@@ -40,14 +40,11 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  - Fix bug #12243: PEAR_Errors not returned from halt()
-  - Add new "return" haltOnError level
-  - Respect haltOnError settings
-  - Implement request #15993: Add setIllegals() method for variable names
+  - Fix bug #18411: Invalid package.xml; not installable with pyrus
  </notes>
  <contents>
   <dir name="/">
-   <file name="bin/html_template_phplibtool" role="script" install-as="html_template_phplibtool" />
+   <file name="bin/html_template_phplibtool" role="script" />
 
    <dir name="examples">
     <file name="authors.php" role="doc" />
@@ -100,7 +97,12 @@ well as some speed improvements.</description>
    </pearinstaller>
   </required>
  </dependencies>
- <phprelease />
+
+ <phprelease>
+  <filelist>
+   <install name="bin/html_template_phplibtool" as="html_template_phplibtool" />
+  </filelist>
+ </phprelease>
 
  <changelog>
   <release>
@@ -313,6 +315,22 @@ well as some speed improvements.</description>
   - Add new "return" haltOnError level
   - Respect haltOnError settings
   - Implement request #15993: Add setIllegals() method for variable names
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.5.1</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-09-05</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+  - Fix bug #18411: Invalid package.xml; not installable with pyrus
    </notes>
   </release>
 
