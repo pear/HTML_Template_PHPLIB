@@ -4,7 +4,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'HTML_Template_PHPLIB_ValidatorTest::main');
 }
 
-require_once 'PHPUnit/Framework.php';
+require_once dirname(__FILE__) . '/helper.inc';
 
 require_once 'HTML/Template/PHPLIB/Validator.php';
 
@@ -54,20 +54,20 @@ class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase
 
         //check blocks from string
         $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '<!-- BEGIN block -->');
-        $this->assertType('array', $arErrors);
+        $this->assertInternalType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
 
         //check blocks from file
         $name = tempnam('/tmp', 'HTML_Template_PHPLIB-test');
         file_put_contents($name, '<!-- BEGIN blo -->');
         $arErrors = HTML_Template_PHPLIB_Validator::validate($name);
-        $this->assertType('array', $arErrors);
+        $this->assertInternalType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
         unlink($name);
 
         //variables are checked, too
         $arErrors = HTML_Template_PHPLIB_Validator::validate(null, '{PARTIAL');
-        $this->assertType('array', $arErrors);
+        $this->assertInternalType('array', $arErrors);
         $this->assertEquals(1, count($arErrors));
     }//public function testValidate()
 

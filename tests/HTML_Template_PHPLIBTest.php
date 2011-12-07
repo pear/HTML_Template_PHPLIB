@@ -4,7 +4,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'HTML_Template_PHPLIBTest::main');
 }
 
-require_once 'PHPUnit/Framework.php';
+require_once dirname(__FILE__) . '/helper.inc';
 
 chdir(dirname(__FILE__) . '/../');
 require_once 'HTML/Template/PHPLIB.php';
@@ -542,21 +542,21 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase
         $this->tpl->haltOnError = 'return';
 
         //setRoot
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->setRoot('this/dir/should/really/not/exist/anywhere')
         );
 
         //setFile
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->setFile('')
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->setFile('abc', 'no/body/has/this/one')
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->setFile(
                 array(
@@ -567,19 +567,19 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase
         );
 
         //setBlock
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->setBlock('no/body/has/this/one', '')
         );
 
         //subst
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->subst('no/body/has/this/one', '')
         );
 
         //getUndefined
-        $this->assertType(
+        $this->assertInstanceOf(
             'PEAR_Error',
             $this->tpl->subst('no/body/has/this/one', '')
         );

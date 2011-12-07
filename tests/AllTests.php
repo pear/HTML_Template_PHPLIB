@@ -3,7 +3,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'HTML_Template_PHPLIB_AllTests::main');
 }
 
-require_once 'PHPUnit/TextUI/TestRunner.php';
+require_once dirname(__FILE__) . '/helper.inc';
 
 
 require_once 'HTML_Template_PHPLIBTest.php';
