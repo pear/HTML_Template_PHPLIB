@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package
- version="2.0"
- xmlns="http://pear.php.net/dtd/package-2.0"
- xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
-  http://pear.php.net/dtd/tasks-1.0.xsd
-  http://pear.php.net/dtd/package-2.0
-  http://pear.php.net/dtd/package-2.0.xsd"
->
+<package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0   http://pear.php.net/dtd/tasks-1.0.xsd   http://pear.php.net/dtd/package-2.0   http://pear.php.net/dtd/package-2.0.xsd">
  <name>HTML_Template_PHPLIB</name>
  <channel>pear.php.net</channel>
  <summary>preg_* based template system.</summary>
  <description>The popular Template system from PHPLIB ported to PEAR. It has some
-features that can't be found currently in the original version like
+features that can&apos;t be found currently in the original version like
 fallback paths. It has minor improvements and cleanup in the code as
 well as some speed improvements.</description>
  <lead>
@@ -28,10 +19,10 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2011-09-05</date>
- <time>07:40:00</time>
+ <date>2012-03-11</date>
+ <time>22:12:41</time>
  <version>
-  <release>1.5.1</release>
+  <release>1.5.2</release>
   <api>1.5.0</api>
  </version>
  <stability>
@@ -40,53 +31,41 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  - Fix bug #18411: Invalid package.xml; not installable with pyrus
+QA release
+Bug #19110 upgrade PHPUnit require statements (for PEAR QA Team)
+Bug #19111 tests die due to PHPUnit::assertType() no longer existing
  </notes>
  <contents>
-  <dir name="/">
-   <file name="bin/html_template_phplibtool" role="script" />
-
-   <dir name="examples">
-    <file name="authors.php" role="doc" />
-    <file name="authors.tpl" role="doc" />
-    <file name="block.ihtml" role="doc" />
-    <file name="block.php"   role="doc" />
-    <file name="broken.tpl"  role="doc" />
-    <file name="ittest.php"  role="doc" />
-    <file name="README"      role="doc" />
-    <file name="tpl1.ihtml"  role="doc" />
-    <file name="tpl1.php"    role="doc" />
-   </dir>
-
-   <dir name="HTML">
-    <dir name="Template">
-     <file name="PHPLIB.php"     role="php" />
-     <dir  name="PHPLIB">
-      <file name="Generator.php" role="php" />
-      <file name="Helper.php"    role="php" />
-      <file name="Tool.php"      role="php" />
-      <file name="Validator.php" role="php" />
-     </dir>
-    </dir>
-   </dir>
-
-   <dir name="tests">
-    <file name="AllTests.php"                           role="test" />
-    <file name="HTML_Template_PHPLIBTest.php"           role="test" />
-    <file name="HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
-    <file name="HTML_Template_PHPLIB_HelperTest.php"    role="test" />
-    <file name="HTML_Template_PHPLIB_ValidatorTest.php" role="test" />
-    <dir name="templates">
-     <file name="block.tpl"   role="test" />
-     <file name="block2.tpl"  role="test" />
-     <file name="block3.tpl"  role="test" />
-     <file name="simple.tpl"  role="test" />
-     <file name="simple2.tpl" role="test" />
-    </dir>
-   </dir>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="" md5sum="eff491669272aaebf7812b1cb5806694" name="bin/html_template_phplibtool" role="script" />
+   <file baseinstalldir="/" md5sum="f860fca6e6ae21b4efa4580f5b45e21f" name="examples/authors.php" role="doc" />
+   <file baseinstalldir="/" md5sum="13d0f3fbbc1fb18e2f5a77e7457ae33d" name="examples/authors.tpl" role="doc" />
+   <file baseinstalldir="/" md5sum="832445e24c44eb5ca3d1e9b69ef98f10" name="examples/block.ihtml" role="doc" />
+   <file baseinstalldir="/" md5sum="49e008ed268e7b44a467c0d7b5907639" name="examples/block.php" role="doc" />
+   <file baseinstalldir="/" md5sum="d725397be04b8cfc8636ef19a9346933" name="examples/broken.tpl" role="doc" />
+   <file baseinstalldir="/" md5sum="e59f3a3c33a827e3cdf04efbb051e2dd" name="examples/ittest.php" role="doc" />
+   <file baseinstalldir="/" md5sum="ed795a842d69c0b16bd8d8c899c65aff" name="examples/README" role="doc" />
+   <file baseinstalldir="/" md5sum="dfcc506aa0da7e1c76810c01400c426e" name="examples/tpl1.ihtml" role="doc" />
+   <file baseinstalldir="/" md5sum="da7aa12c2ad19a0390d8f8687cbdea27" name="examples/tpl1.php" role="doc" />
+   <file baseinstalldir="/" md5sum="fd14305440cef2e1ad9fb18c9952ab15" name="HTML/Template/PHPLIB.php" role="php" />
+   <file baseinstalldir="/" md5sum="796968742d848e2f236f544ac5d23f51" name="HTML/Template/PHPLIB/Generator.php" role="php" />
+   <file baseinstalldir="/" md5sum="4efe6de647b47831f1d4a1c504fae564" name="HTML/Template/PHPLIB/Helper.php" role="php" />
+   <file baseinstalldir="/" md5sum="af45a628d98ad6cc2e6317fe673ade7f" name="HTML/Template/PHPLIB/Tool.php" role="php" />
+   <file baseinstalldir="/" md5sum="fad6298ec0721ed2bb2490278e4ed54c" name="HTML/Template/PHPLIB/Validator.php" role="php" />
+   <file baseinstalldir="/" md5sum="cf3c194013aaf7464d6b5fd3ded4f4e8" name="tests/AllTests.php" role="test" />
+   <file baseinstalldir="/" md5sum="cd607e46a729a36d036cbeeb28202ffa" name="tests/helper.inc" role="test" />
+   <file baseinstalldir="/" md5sum="8269d42654021ece3cf33fb145883637" name="tests/HTML_Template_PHPLIBTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="6a1ef78c9c6e4f95f24d218407ba71b2" name="tests/HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="125829e4a6e6cbe6c4616f11509c22fb" name="tests/HTML_Template_PHPLIB_HelperTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="89e6b2be93927ebbd9fe80b26f3ac235" name="tests/HTML_Template_PHPLIB_ValidatorTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="b3a807cd13f43b50a27a18f6c9a07be7" name="tests/templates/block.tpl" role="test" />
+   <file baseinstalldir="/" md5sum="cc4311ee355e2b14043ae487f19f9b89" name="tests/templates/block2.tpl" role="test" />
+   <file baseinstalldir="/" md5sum="b239c73800bb5ce51b890d97007b3fee" name="tests/templates/block3.tpl" role="test" />
+   <file baseinstalldir="/" md5sum="033176ae27d7d551db05927158f2f0b2" name="tests/templates/simple.tpl" role="test" />
+   <file baseinstalldir="/" md5sum="dfde2a47693c8d16c592b21b774ca790" name="tests/templates/simple2.tpl" role="test" />
+   <file baseinstalldir="/" md5sum="dada4c5ee90d838c1a55933b2a04ecbc" name="README" role="data" />
   </dir>
  </contents>
-
  <dependencies>
   <required>
    <php>
@@ -97,13 +76,11 @@ well as some speed improvements.</description>
    </pearinstaller>
   </required>
  </dependencies>
-
  <phprelease>
   <filelist>
-   <install name="bin/html_template_phplibtool" as="html_template_phplibtool" />
+   <install as="html_template_phplibtool" name="bin/html_template_phplibtool" />
   </filelist>
  </phprelease>
-
  <changelog>
   <release>
    <version>
@@ -116,9 +93,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2001-09-04</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>This is the initial independent release of the Template_PHPLIB package.</notes>
+   <notes>
+This is the initial independent release of the Template_PHPLIB package.
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.1</release>
@@ -130,9 +108,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2002-04-28</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>Renamed to HTML_PHPLIB_Template.</notes>
+   <notes>
+Renamed to HTML_PHPLIB_Template.
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.1.1</release>
@@ -144,9 +123,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2003-02-01</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>Fix warning when using error_reporting(E_ALL).</notes>
+   <notes>
+Fix warning when using error_reporting(E_ALL).
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.2</release>
@@ -158,9 +138,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2003-02-12</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>Removed a serious bug concerning the loadfile method.</notes>
+   <notes>
+Removed a serious bug concerning the loadfile method.
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.3</release>
@@ -172,15 +153,16 @@ well as some speed improvements.</description>
    </stability>
    <date>2003-06-03</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>- added examples with use of Benchmark_Timer
+   <notes>
+- added examples with use of Benchmark_Timer
 - added fallback template paths, i.e. first search
   in &quot;./&quot; and then in &quot;/www/myinstall/mastertemplates/A/&quot;
   and then in &quot;/www/myinstall/mastertemplates/B/&quot;
 - got rid of implode(...,file()) and using file_get_contents()
   if available (PHP &gt;= 4.3.0)
-- some minor improvements and cleanup in the code</notes>
+- some minor improvements and cleanup in the code
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.3.1</release>
@@ -192,9 +174,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2003-06-11</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>Bugfix release, update recommended if you use PHP &lt;=4.3.0</notes>
+   <notes>
+Bugfix release, update recommended if you use PHP &lt;=4.3.0
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.3.2</release>
@@ -206,14 +189,15 @@ well as some speed improvements.</description>
    </stability>
    <date>2007-04-24</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>Bugfix release:
+   <notes>
+Bugfix release:
 - fixing bug #6945: undefined variable notice in function finish($str)
 - class name is HTML_Template_PHPLIB now
 - package.xml v2
 - unit tests
-- cweiske is lead now</notes>
+- cweiske is lead now
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.3.3</release>
@@ -225,9 +209,10 @@ well as some speed improvements.</description>
    </stability>
    <date>2007-07-08</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
-   <notes>- method to retrieve last error</notes>
+   <notes>
+- method to retrieve last error
+   </notes>
   </release>
-
   <release>
    <version>
     <release>1.4.0a1</release>
@@ -240,11 +225,10 @@ well as some speed improvements.</description>
    <date>2007-10-01</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-  - Fix bug #11889: function _filename() not works well on Windows [cweiske]
-  - Add command line tool to validate template files
+- Fix bug #11889: function _filename() not works well on Windows [cweiske]
+- Add command line tool to validate template files
    </notes>
   </release>
-
   <release>
    <version>
     <release>1.4.0a2</release>
@@ -257,11 +241,10 @@ well as some speed improvements.</description>
    <date>2007-10-04</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-  - Fix bug #12168: script binary installed into wrong path [cweiske]
-  - Command line tool can generate PHP code now (part of request #12169) [cweiske]
+- Fix bug #12168: script binary installed into wrong path [cweiske]
+- Command line tool can generate PHP code now (part of request #12169) [cweiske]
    </notes>
   </release>
-
   <release>
    <version>
     <release>1.4.0a3</release>
@@ -274,11 +257,10 @@ well as some speed improvements.</description>
    <date>2007-10-14</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-  - Fix bug #12229: broken blocks not detected [cweiske]
-  - Validate variables
+- Fix bug #12229: broken blocks not detected [cweiske]
+- Validate variables
    </notes>
   </release>
-
   <release>
    <version>
     <release>1.4.0</release>
@@ -292,13 +274,12 @@ well as some speed improvements.</description>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
 - Fix bug #12243: PEAR_Errors not returned from halt()
-- Add new "return" haltOnError level
+- Add new &quot;return&quot; haltOnError level
 - Respect haltOnError settings
 - Command line tool to validate template files
 - Command line tool to generate php code from template files
    </notes>
   </release>
-
   <release>
    <version>
     <release>1.5.0</release>
@@ -311,13 +292,12 @@ well as some speed improvements.</description>
    <date>2009-09-19</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-  - Fix bug #12243: PEAR_Errors not returned from halt()
-  - Add new "return" haltOnError level
-  - Respect haltOnError settings
-  - Implement request #15993: Add setIllegals() method for variable names
+- Fix bug #12243: PEAR_Errors not returned from halt()
+- Add new &quot;return&quot; haltOnError level
+- Respect haltOnError settings
+- Implement request #15993: Add setIllegals() method for variable names
    </notes>
   </release>
-
   <release>
    <version>
     <release>1.5.1</release>
@@ -330,9 +310,25 @@ well as some speed improvements.</description>
    <date>2011-09-05</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
    <notes>
-  - Fix bug #18411: Invalid package.xml; not installable with pyrus
+- Fix bug #18411: Invalid package.xml; not installable with pyrus
    </notes>
   </release>
-
+  <release>
+   <version>
+    <release>1.5.2</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2012-03-11</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+QA release
+Bug #19110 upgrade PHPUnit require statements (for PEAR QA Team)
+Bug #19111 tests die due to PHPUnit::assertType() no longer existing
+   </notes>
+  </release>
  </changelog>
 </package>
