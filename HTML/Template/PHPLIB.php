@@ -114,7 +114,7 @@ class HTML_Template_PHPLIB
      *
      * @access public
      */
-    function HTML_Template_PHPLIB(
+    function __construct(
         $root = '.', $unknowns = 'remove', $fallback=''
     ) {
         $this->setRoot($root);

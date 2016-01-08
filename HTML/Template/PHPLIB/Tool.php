@@ -28,11 +28,11 @@ class HTML_Template_PHPLIB_Tool
     *
     * @param array $args Cmdline arguments
     */
-    function HTML_Template_PHPLIB_Tool($args)
+    function __construct($args)
     {
         $strAction = $this->getAction($args);
         $this->{'do' . ucfirst($strAction)}($args);
-    }//function HTML_Template_PHPLIB_Tool($args)
+    }//function __construct($args)
 
 
 
