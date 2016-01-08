@@ -2,7 +2,7 @@
 /**
  * Additional tools for HTML_Template_PHPLIB
  *
- * PHP Versions 4 and 5
+ * PHP Versions 4.x/5.x/7.0.x
  *
  * @category HTML
  * @package  HTML_Template_PHPLIB
@@ -28,11 +28,11 @@ class HTML_Template_PHPLIB_Tool
     *
     * @param array $args Cmdline arguments
     */
-    function HTML_Template_PHPLIB_Tool($args)
+    function __construct($args)
     {
         $strAction = $this->getAction($args);
         $this->{'do' . ucfirst($strAction)}($args);
-    }//function HTML_Template_PHPLIB_Tool($args)
+    }//function __construct($args)
 
 
 
