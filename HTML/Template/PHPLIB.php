@@ -4,7 +4,7 @@
  * is copyright by Kristian Koehntopp, NetUSE AG and was released
  * under the LGPL.
  *
- * PHP Versions 4 and 5
+ * PHP Versions 4.x/5.x/7.0.x
  *
  * @category HTML
  * @package  HTML_Template_PHPLIB
@@ -114,7 +114,7 @@ class HTML_Template_PHPLIB
      *
      * @access public
      */
-    function HTML_Template_PHPLIB(
+    function __construct(
         $root = '.', $unknowns = 'remove', $fallback=''
     ) {
         $this->setRoot($root);
