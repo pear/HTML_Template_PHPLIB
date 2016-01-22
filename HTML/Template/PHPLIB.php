@@ -4,7 +4,7 @@
  * is copyright by Kristian Koehntopp, NetUSE AG and was released
  * under the LGPL.
  *
- * PHP Versions 4 and 5
+ * PHP versions 5 and 7
  *
  * @category HTML
  * @package  HTML_Template_PHPLIB

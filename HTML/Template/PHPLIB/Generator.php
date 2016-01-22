@@ -2,7 +2,7 @@
 /**
  * Additional tools for HTML_Template_PHPLIB
  *
- * PHP Versions 4 and 5
+ * PHP versions 5 and 7
  *
  * @category HTML
  * @package  HTML_Template_PHPLIB
