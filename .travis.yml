@@ -12,3 +12,4 @@ script:
   - phpunit .
   - cd ..
   - pear package-validate
+  - composer validate
