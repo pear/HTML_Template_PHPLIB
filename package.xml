@@ -37,31 +37,31 @@ Bug #19111 tests die due to PHPUnit::assertType() no longer existing
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="" md5sum="eff491669272aaebf7812b1cb5806694" name="bin/html_template_phplibtool" role="script" />
-   <file baseinstalldir="/" md5sum="f860fca6e6ae21b4efa4580f5b45e21f" name="examples/authors.php" role="doc" />
-   <file baseinstalldir="/" md5sum="13d0f3fbbc1fb18e2f5a77e7457ae33d" name="examples/authors.tpl" role="doc" />
-   <file baseinstalldir="/" md5sum="832445e24c44eb5ca3d1e9b69ef98f10" name="examples/block.ihtml" role="doc" />
-   <file baseinstalldir="/" md5sum="49e008ed268e7b44a467c0d7b5907639" name="examples/block.php" role="doc" />
-   <file baseinstalldir="/" md5sum="d725397be04b8cfc8636ef19a9346933" name="examples/broken.tpl" role="doc" />
-   <file baseinstalldir="/" md5sum="e59f3a3c33a827e3cdf04efbb051e2dd" name="examples/ittest.php" role="doc" />
-   <file baseinstalldir="/" md5sum="ed795a842d69c0b16bd8d8c899c65aff" name="examples/README" role="doc" />
-   <file baseinstalldir="/" md5sum="dfcc506aa0da7e1c76810c01400c426e" name="examples/tpl1.ihtml" role="doc" />
-   <file baseinstalldir="/" md5sum="da7aa12c2ad19a0390d8f8687cbdea27" name="examples/tpl1.php" role="doc" />
-   <file baseinstalldir="/" md5sum="fd14305440cef2e1ad9fb18c9952ab15" name="HTML/Template/PHPLIB.php" role="php" />
-   <file baseinstalldir="/" md5sum="796968742d848e2f236f544ac5d23f51" name="HTML/Template/PHPLIB/Generator.php" role="php" />
-   <file baseinstalldir="/" md5sum="4efe6de647b47831f1d4a1c504fae564" name="HTML/Template/PHPLIB/Helper.php" role="php" />
-   <file baseinstalldir="/" md5sum="af45a628d98ad6cc2e6317fe673ade7f" name="HTML/Template/PHPLIB/Tool.php" role="php" />
-   <file baseinstalldir="/" md5sum="fad6298ec0721ed2bb2490278e4ed54c" name="HTML/Template/PHPLIB/Validator.php" role="php" />
-   <file baseinstalldir="/" md5sum="8269d42654021ece3cf33fb145883637" name="tests/HTML_Template_PHPLIBTest.php" role="test" />
-   <file baseinstalldir="/" md5sum="6a1ef78c9c6e4f95f24d218407ba71b2" name="tests/HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
-   <file baseinstalldir="/" md5sum="125829e4a6e6cbe6c4616f11509c22fb" name="tests/HTML_Template_PHPLIB_HelperTest.php" role="test" />
-   <file baseinstalldir="/" md5sum="89e6b2be93927ebbd9fe80b26f3ac235" name="tests/HTML_Template_PHPLIB_ValidatorTest.php" role="test" />
-   <file baseinstalldir="/" md5sum="b3a807cd13f43b50a27a18f6c9a07be7" name="tests/templates/block.tpl" role="test" />
-   <file baseinstalldir="/" md5sum="cc4311ee355e2b14043ae487f19f9b89" name="tests/templates/block2.tpl" role="test" />
-   <file baseinstalldir="/" md5sum="b239c73800bb5ce51b890d97007b3fee" name="tests/templates/block3.tpl" role="test" />
-   <file baseinstalldir="/" md5sum="033176ae27d7d551db05927158f2f0b2" name="tests/templates/simple.tpl" role="test" />
-   <file baseinstalldir="/" md5sum="dfde2a47693c8d16c592b21b774ca790" name="tests/templates/simple2.tpl" role="test" />
-   <file baseinstalldir="/" md5sum="dada4c5ee90d838c1a55933b2a04ecbc" name="README" role="data" />
+   <file baseinstalldir="" name="bin/html_template_phplibtool" role="script" />
+   <file baseinstalldir="/" name="examples/authors.php" role="doc" />
+   <file baseinstalldir="/" name="examples/authors.tpl" role="doc" />
+   <file baseinstalldir="/" name="examples/block.ihtml" role="doc" />
+   <file baseinstalldir="/" name="examples/block.php" role="doc" />
+   <file baseinstalldir="/" name="examples/broken.tpl" role="doc" />
+   <file baseinstalldir="/" name="examples/ittest.php" role="doc" />
+   <file baseinstalldir="/" name="examples/README" role="doc" />
+   <file baseinstalldir="/" name="examples/tpl1.ihtml" role="doc" />
+   <file baseinstalldir="/" name="examples/tpl1.php" role="doc" />
+   <file baseinstalldir="/" name="HTML/Template/PHPLIB.php" role="php" />
+   <file baseinstalldir="/" name="HTML/Template/PHPLIB/Generator.php" role="php" />
+   <file baseinstalldir="/" name="HTML/Template/PHPLIB/Helper.php" role="php" />
+   <file baseinstalldir="/" name="HTML/Template/PHPLIB/Tool.php" role="php" />
+   <file baseinstalldir="/" name="HTML/Template/PHPLIB/Validator.php" role="php" />
+   <file baseinstalldir="/" name="tests/HTML_Template_PHPLIBTest.php" role="test" />
+   <file baseinstalldir="/" name="tests/HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
+   <file baseinstalldir="/" name="tests/HTML_Template_PHPLIB_HelperTest.php" role="test" />
+   <file baseinstalldir="/" name="tests/HTML_Template_PHPLIB_ValidatorTest.php" role="test" />
+   <file baseinstalldir="/" name="tests/templates/block.tpl" role="test" />
+   <file baseinstalldir="/" name="tests/templates/block2.tpl" role="test" />
+   <file baseinstalldir="/" name="tests/templates/block3.tpl" role="test" />
+   <file baseinstalldir="/" name="tests/templates/simple.tpl" role="test" />
+   <file baseinstalldir="/" name="tests/templates/simple2.tpl" role="test" />
+   <file baseinstalldir="/" name="README" role="data" />
   </dir>
  </contents>
  <dependencies>
