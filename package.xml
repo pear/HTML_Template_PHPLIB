@@ -52,8 +52,6 @@ Bug #19111 tests die due to PHPUnit::assertType() no longer existing
    <file baseinstalldir="/" md5sum="4efe6de647b47831f1d4a1c504fae564" name="HTML/Template/PHPLIB/Helper.php" role="php" />
    <file baseinstalldir="/" md5sum="af45a628d98ad6cc2e6317fe673ade7f" name="HTML/Template/PHPLIB/Tool.php" role="php" />
    <file baseinstalldir="/" md5sum="fad6298ec0721ed2bb2490278e4ed54c" name="HTML/Template/PHPLIB/Validator.php" role="php" />
-   <file baseinstalldir="/" md5sum="cf3c194013aaf7464d6b5fd3ded4f4e8" name="tests/AllTests.php" role="test" />
-   <file baseinstalldir="/" md5sum="cd607e46a729a36d036cbeeb28202ffa" name="tests/helper.inc" role="test" />
    <file baseinstalldir="/" md5sum="8269d42654021ece3cf33fb145883637" name="tests/HTML_Template_PHPLIBTest.php" role="test" />
    <file baseinstalldir="/" md5sum="6a1ef78c9c6e4f95f24d218407ba71b2" name="tests/HTML_Template_PHPLIB_GeneratorTest.php" role="test" />
    <file baseinstalldir="/" md5sum="125829e4a6e6cbe6c4616f11509c22fb" name="tests/HTML_Template_PHPLIB_HelperTest.php" role="test" />

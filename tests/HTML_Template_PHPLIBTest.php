@@ -1,11 +1,4 @@
 <?php
-// Call HTML_Template_PHPLIBTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'HTML_Template_PHPLIBTest::main');
-}
-
-require_once dirname(__FILE__) . '/helper.inc';
-
 chdir(dirname(__FILE__) . '/../');
 require_once 'HTML/Template/PHPLIB.php';
 
@@ -21,24 +14,6 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase
      * @var HTML_Template_PHPLIB
      */
     protected $tpl = null;
-
-
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main() {
-        require_once 'PHPUnit/TextUI/TestRunner.php';
-
-        $suite  = new PHPUnit_Framework_TestSuite('HTML_Template_PHPLIBTest');
-        PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -586,10 +561,5 @@ class HTML_Template_PHPLIBTest extends PHPUnit_Framework_TestCase
 
     }//public function testHaltOnErrorReturn()
 
-}
-
-// Call HTML_Template_PHPLIBTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'HTML_Template_PHPLIBTest::main') {
-    HTML_Template_PHPLIBTest::main();
 }
 ?>

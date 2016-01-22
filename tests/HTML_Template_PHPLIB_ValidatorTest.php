@@ -1,11 +1,4 @@
 <?php
-// Call HTML_Template_PHPLIB_ValidatorTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'HTML_Template_PHPLIB_ValidatorTest::main');
-}
-
-require_once dirname(__FILE__) . '/helper.inc';
-
 require_once 'HTML/Template/PHPLIB/Validator.php';
 
 /**
@@ -14,39 +7,6 @@ require_once 'HTML/Template/PHPLIB/Validator.php';
  */
 class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main() {
-        require_once 'PHPUnit/TextUI/TestRunner.php';
-
-        $suite  = new PHPUnit_Framework_TestSuite('HTML_Template_PHPLIB_ValidatorTest');
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     *
-     * @access protected
-     */
-    protected function setUp() {
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @access protected
-     */
-    protected function tearDown() {
-    }
-
-
-
     public function testValidate()
     {
         $this->assertFalse(HTML_Template_PHPLIB_Validator::validate());
@@ -406,9 +366,4 @@ array (
     }//protected static function stripMessages($arErrors)
 
 }//class HTML_Template_PHPLIB_ValidatorTest extends PHPUnit_Framework_TestCase
-
-// Call HTML_Template_PHPLIB_ValidatorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'HTML_Template_PHPLIB_ValidatorTest::main') {
-    HTML_Template_PHPLIB_ValidatorTest::main();
-}
 ?>
