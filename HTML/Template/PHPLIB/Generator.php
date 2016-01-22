@@ -104,10 +104,8 @@ class HTML_Template_PHPLIB_Generator
     * @param array $arLines Template code lines
     *
     * @return array Array of blocks
-    *
-    * @static
     */
-    function getBlocks($arLines)
+    public static function getBlocks($arLines)
     {
         $arBlocks = array();
         $arRefs   = array();
@@ -153,7 +151,7 @@ class HTML_Template_PHPLIB_Generator
     *
     * @return string Template name
     */
-    function getTemplateNameFromFilename($strFile)
+    public static function getTemplateNameFromFilename($strFile)
     {
         $strTplName = basename($strFile);
         //remove extension

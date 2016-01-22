@@ -33,10 +33,8 @@ class HTML_Template_PHPLIB_Helper
     *
     * @return array Array with text lines, without trailing newlines,
     *                false when both are null
-    *
-    * @static
     */
-    function getLines($strFile = null, $strContent = null)
+    public static function getLines($strFile = null, $strContent = null)
     {
         if ($strContent !== null) {
             $arLines = HTML_Template_PHPLIB_Helper::splitLines($strContent);
@@ -61,10 +59,8 @@ class HTML_Template_PHPLIB_Helper
     * @param string $strContent File content to be split into lines
     *
     * @return array Array of line strings without trailing newlines
-    *
-    * @static
     */
-    function splitLines($strContent)
+    public static function splitLines($strContent)
     {
         return explode(
             "\n", str_replace(array("\r\n", "\r"), "\n", $strContent)

@@ -39,10 +39,8 @@ class HTML_Template_PHPLIB_Validator
     *                - 'line'    (line number)
     *                - 'code'    (code that caused the error)
     *                false if no file and content is given
-    *
-    * @static
     */
-    function validate($strFile = null, $strContent = null)
+    public static function validate($strFile = null, $strContent = null)
     {
         $arLines = HTML_Template_PHPLIB_Helper::getLines($strFile, $strContent);
         if ($arLines === false) {
@@ -69,10 +67,8 @@ class HTML_Template_PHPLIB_Validator
     *
     * @return array Array of errors/warnings. An error/warning is an array
     *                of several keys: message, line
-    *
-    * @static
     */
-    function checkBlockDefinitions($arLines)
+    public static function checkBlockDefinitions($arLines)
     {
         //Array of block definitions found.
         // key is the block name, value is an array of line numbers
@@ -250,7 +246,7 @@ class HTML_Template_PHPLIB_Validator
     *
     * @return array Array of error messages.
     */
-    function checkVariables($arLines)
+    public static function checkVariables($arLines)
     {
         $arErrors      = array();
         $strAllowed    = 'a-zA-Z0-9_-';
@@ -309,7 +305,7 @@ class HTML_Template_PHPLIB_Validator
     *
     * @return void
     */
-    function sortByLine(&$arErrors)
+    public static function sortByLine(&$arErrors)
     {
         if (!is_array($arErrors)) {
             return;
@@ -327,7 +323,7 @@ class HTML_Template_PHPLIB_Validator
     *
     * @return integer -1, 0 or 1 if $arA is smaller, equal or bigger than $arB
     */
-    function intcmpLine($arA, $arB)
+    public static function intcmpLine($arA, $arB)
     {
         return $arA['line'] - $arB['line'];
     }//function intcmpLine($arA, $arB)
