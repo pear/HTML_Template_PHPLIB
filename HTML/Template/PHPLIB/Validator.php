@@ -301,7 +301,7 @@ class HTML_Template_PHPLIB_Validator
     /**
     * Sorts the given error array by line numbers
     *
-    * @param array &$arErrors Error array
+    * @param array $arErrors Error array
     *
     * @return void
     */

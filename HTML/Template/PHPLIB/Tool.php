@@ -54,7 +54,7 @@ class HTML_Template_PHPLIB_Tool
     /**
     * Returns the action to execute
     *
-    * @param array &$args Array of command line arguments
+    * @param array $args Array of command line arguments
     *
     * @return string Action to execute
     */

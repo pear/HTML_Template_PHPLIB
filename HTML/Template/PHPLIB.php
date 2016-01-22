@@ -46,7 +46,7 @@ class HTML_Template_PHPLIB
     var $file  = array();
 
     /**
-     * fallback paths that should be defined in a child class
+     * Fallback paths that should be defined in a child class
      * @var array
      */
     var $file_fallbacks = array();
@@ -210,7 +210,7 @@ class HTML_Template_PHPLIB
     /**
      * What to do with unknown variables
      *
-     * three possible values:
+     * Three possible values:
      *
      * - 'remove' will remove unknown variables
      *   (don't use this if you define CSS in your page)
@@ -419,7 +419,7 @@ class HTML_Template_PHPLIB
      *
      * @return bool always false
      * @access public
-     * @see subst
+     * @see    subst
      */
     function pSubst($handle)
     {
@@ -469,7 +469,7 @@ class HTML_Template_PHPLIB
      *
      * @return bool
      * @access public
-     * @see parse
+     * @see    parse
      */
     function pParse($target, $handle, $append = false)
     {
@@ -693,7 +693,7 @@ class HTML_Template_PHPLIB
     }
 
     /**
-     * load file defined by handle if it is not loaded yet
+     * Load file defined by handle if it is not loaded yet
      *
      * @param string $handle File handle
      *
@@ -770,7 +770,7 @@ class HTML_Template_PHPLIB
     }
 
     /**
-     * printf error message to show
+     * Printf error message to show
      *
      * @param string $msg   Message to show
      * @param string $mode  PEAR error mode, i.e. PEAR_ERROR_RETURN
