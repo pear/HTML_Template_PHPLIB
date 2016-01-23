@@ -20,9 +20,11 @@
     "include-path": [
         "./"
     ],
+    "homepage": "http://pear.php.net/package/HTML_Template_PHPLIB",
     "license": "LGPL-2.1",
     "name": "pear/html_template_phplib",
     "support": {
+        "docs": "http://pear.php.net/manual/en/package.html.html-template-phplib.php",
         "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTML_Template_PHPLIB",
         "source": "https://github.com/pear/HTML_Template_PHPLIB"
     },
