@@ -19,11 +19,11 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2012-03-11</date>
- <time>22:12:41</time>
+ <date>2016-01-23</date>
+ <time>15:31:42</time>
  <version>
-  <release>1.5.2</release>
-  <api>1.5.0</api>
+  <release>1.6.0</release>
+  <api>1.6.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -31,9 +31,8 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-QA release
-Bug #19110 upgrade PHPUnit require statements (for PEAR QA Team)
-Bug #19111 tests die due to PHPUnit::assertType() no longer existing
+  - PHP 7 compatibility
+  - Minimum PHP version raised to 5.4
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -61,7 +60,7 @@ Bug #19111 tests die due to PHPUnit::assertType() no longer existing
    <file baseinstalldir="/" name="tests/templates/block3.tpl" role="test" />
    <file baseinstalldir="/" name="tests/templates/simple.tpl" role="test" />
    <file baseinstalldir="/" name="tests/templates/simple2.tpl" role="test" />
-   <file baseinstalldir="/" name="README" role="data" />
+   <file baseinstalldir="/" name="README.rst" role="doc" />
   </dir>
  </contents>
  <dependencies>
@@ -311,6 +310,7 @@ Bugfix release:
 - Fix bug #18411: Invalid package.xml; not installable with pyrus
    </notes>
   </release>
+
   <release>
    <version>
     <release>1.5.2</release>
@@ -328,5 +328,23 @@ Bug #19110 upgrade PHPUnit require statements (for PEAR QA Team)
 Bug #19111 tests die due to PHPUnit::assertType() no longer existing
    </notes>
   </release>
+
+  <release>
+   <version>
+    <release>1.6.0</release>
+    <api>1.6.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2016-01-23</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+    - PHP 7 compatibility
+    - Minimum PHP version raised to 5.4
+   </notes>
+  </release>
+
  </changelog>
 </package>
