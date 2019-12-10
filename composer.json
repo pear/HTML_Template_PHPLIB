@@ -19,7 +19,7 @@
         "./"
     ],
     "homepage": "http://pear.php.net/package/HTML_Template_PHPLIB",
-    "license": "LGPL-2.1",
+    "license": "LGPL-2.1-or-later",
     "name": "pear/html_template_phplib",
     "support": {
         "docs": "http://pear.php.net/manual/en/package.html.html-template-phplib.php",
