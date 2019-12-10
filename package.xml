@@ -19,10 +19,10 @@ well as some speed improvements.</description>
   <email>cweiske@php.net</email>
   <active>yes</active>
  </lead>
- <date>2016-01-23</date>
- <time>15:31:42</time>
+ <date>2019-12-10</date>
+ <time>10:23:42</time>
  <version>
-  <release>1.6.0</release>
+  <release>1.6.1</release>
   <api>1.6.0</api>
  </version>
  <stability>
@@ -31,8 +31,9 @@ well as some speed improvements.</description>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
  <notes>
-  - PHP 7 compatibility
-  - Minimum PHP version raised to 5.4
+   - Replace "each()" calls with "foreach" for PHP 7.2-compatibility
+   - Fix autoloading definition for composer 1.11
+   - Fix LGPL SPDX license identifier in composer.json
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -343,6 +344,24 @@ Bug #19111 tests die due to PHPUnit::assertType() no longer existing
    <notes>
     - PHP 7 compatibility
     - Minimum PHP version raised to 5.4
+   </notes>
+  </release>
+
+  <release>
+   <version>
+    <release>1.6.1</release>
+    <api>1.6.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2019-12-10</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+   <notes>
+     - Replace "each()" calls with "foreach" for PHP 7.2-compatibility
+     - Fix autoloading definition for composer 1.11
+     - Fix LGPL SPDX license identifier in composer.json
    </notes>
   </release>
 
