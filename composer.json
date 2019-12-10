@@ -12,9 +12,7 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "HTML": "./"
-        }
+        "classmap": ["HTML/"]
     },
     "description": "preg_* based template system.",
     "include-path": [
